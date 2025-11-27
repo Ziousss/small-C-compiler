@@ -12,7 +12,7 @@ bool isDelimiter (char chr) {
 bool isOperation (char chr) {
     return (chr == '+' || chr == '-' || chr == '*' 
             || chr == '/' || chr == '<' || chr == '='
-            || chr == '=' || chr == '>' );
+            || chr == '=' || chr == '>' || chr == '!');
 }
 
 bool notAccepted (char chr) {
@@ -49,7 +49,7 @@ bool isKeyword (char *str) {
         {"auto", "for", "while", "if", "else", "char", 
           "int", "float", "double", "struct", "const", 
           "long", "break", "case", "do", "return", "static",
-          "sizeof", "void", "unsigned", "continue", "main"};
+          "sizeof", "void", "unsigned", "continue"};
   
     for(int i = 0; i < sizeof(keyword)/sizeof(keyword[0]); i++){
         if (strcmp(str, keyword[i]) == 0){
@@ -57,19 +57,6 @@ bool isKeyword (char *str) {
         }
     } 
     return false;
-}
-
-bool isInteger (char *str) {
-    if (str == NULL || *str == '\0'){
-        return false;
-    }
-
-    int i = 0;
-    while (isdigit(str[i])){
-        i++;
-    }
-
-    return str[i] == '\0';
 }
 
 char* getSubstring (char *str, int start, int end) {

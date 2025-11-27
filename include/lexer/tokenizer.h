@@ -9,17 +9,17 @@
 
 typedef enum {
     //general
-    TOK_LABEL, INTEGER_LITERAL, CHAR_LITERAL, STRING_LITERAL, FLOAT_LITERAL, UNIDENTIFIED, 
+    TOK_IDENTIFIER, INTEGER_LITERAL, CHAR_LITERAL, STRING_LITERAL, FLOAT_LITERAL, UNIDENTIFIED, 
     //Types
     TOK_INT, TOK_CHAR, TOK_VOID,
     //operator
-    TOK_PLUS, TOK_MINUS, TOK_STAR, TOK_SLASH, 
+    TOK_PLUS, TOK_MINUS, TOK_STAR, TOK_SLASH, TOK_PLUSEQ, TOK_MINUSEQ, TOK_UNEQ, TOK_EQEQ,
     //keyword
     TOK_IF, TOK_RETURN, TOK_WHILE, TOK_FUNC, TOK_EOF,TOK_ERROR, TOK_CASE, TOK_FOR, TOK_ELSE, TOK_DO,
         TOK_CONTINUE, TOK_BREAK, TOK_SWITCH, TOK_MAIN,
     //delimiter
-    TOK_COMMA, TOK_SEMICOLON, TOK_EQ, TOK_EQEQ, TOK_LPAREN, TOK_RPAREN, TOK_LBRACE, TOK_RBRACE, 
-        TOK_LSQRTBRAK, TOK_RSQRTBRAK, TOK_DOUBLEPOINT,
+    TOK_COMMA, TOK_SEMICOLON, TOK_EQ, TOK_LPAREN, TOK_RPAREN, TOK_LBRACE, TOK_RBRACE, 
+        TOK_LSQRTBRAK, TOK_RSQRTBRAK, TOK_DOUBLEPOINT, TOK_EXCLAMATION,
     //boolean/null
     TOK_TRUE, TOK_FALSE, TOK_NULL
 } Tokentype;
@@ -42,5 +42,6 @@ const char* tokenTypeToString(int type);
 Tokenstruct *lexicalAnalyzer (char* input);
 Tokenstruct *maketokenChar (Tokenstruct *tokenlist, int count, Tokentype type, char chr, int length, int line);
 Tokenstruct *maketokenString (Tokenstruct *tokenlist, int count, Tokentype type, char *sub, int length, int line);
+Tokentype keyword_type(char *sub);
 
 #endif

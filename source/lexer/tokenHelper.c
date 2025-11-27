@@ -2,7 +2,7 @@
 
 const char* tokenTypeToString(int type) {
     switch (type) {
-        case TOK_LABEL:         return "LABEL";
+        case TOK_IDENTIFIER:         return "IDENTIFIER";
         case INTEGER_LITERAL:   return "INTEGER_LITERAL";
         case FLOAT_LITERAL:     return "FLOAT_LITERAL";
         case CHAR_LITERAL:      return "CHAR_LITERAL";
@@ -10,9 +10,12 @@ const char* tokenTypeToString(int type) {
         case UNIDENTIFIED:      return "UNIDENTIFIED";
 
         case TOK_PLUS:          return "PLUS";
+        case TOK_PLUSEQ:        return "PLUSEQ";
         case TOK_MINUS:         return "MINUS";
+        case TOK_MINUSEQ:       return "MINUSEQ";
         case TOK_STAR:          return "STAR";
         case TOK_SLASH:         return "SLASH";
+        case TOK_UNEQ:          return "UNEQ";
 
         case TOK_EQ:            return "EQUAL";
         case TOK_EQEQ:          return "EQUAL_EQUAL";
@@ -25,6 +28,7 @@ const char* tokenTypeToString(int type) {
         case TOK_COMMA:         return "COMMA"; 
         case TOK_SEMICOLON:     return "SEMICOLON";
         case TOK_DOUBLEPOINT:   return "DOOUBLEPOINT";
+        case TOK_EXCLAMATION:   return "EXCLAMATION";
 
         case TOK_IF:            return "IF";
         case TOK_WHILE:         return "WHILE";
@@ -79,6 +83,16 @@ Keyword keywords[] = {
     {"true", TOK_TRUE},
     {"false", TOK_FALSE},
     {"NULL", TOK_NULL},
-    {"main", TOK_MAIN},
     {NULL, 0} 
 };
+
+Tokentype keyword_type(char *sub){
+
+
+    for (int i = 0; keywords[i].lexeme != NULL; i++){
+        if (strcmp(keywords[i].lexeme,sub) == 0) {
+            return keywords[i].type;
+        }
+    }
+    return TOK_IDENTIFIER;
+}

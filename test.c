@@ -1,3 +1,3 @@
-int (){
-    int a = 5;
+int main(){
+    char var1 ! 546;
 }
