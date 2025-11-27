@@ -1,24 +1,18 @@
 #include "../include/lexer/charcheck.h"
 
-bool isDelimiter (char chr) {
-    return (chr == ' ' || chr == '+' || chr == '-'
-            || chr == '*' || chr == '/' || chr == ','
-            || chr == ';' || chr == '%' || chr == '>'
-            || chr == '<' || chr == '=' || chr == '('
-            || chr == ')' || chr == '[' || chr == ']'
-            || chr == '{' || chr == '}' || chr == ','
-            || chr == '.');
-}
 
-bool specialCaseDelimiter (char chr) {
-    return (chr == ',' || chr == ';' || chr == '%' 
-            || chr == '(' || chr == ')' || chr == '[' 
-            || chr == ']' || chr == '{' || chr == '}');
+bool isDelimiter (char chr) {
+    return (chr == ',' || chr == ',' || chr == '.'
+            || chr == ';' || chr == '%' || chr == '>'
+            || chr == '<' || chr == '(' || chr == ':'
+            || chr == ')' || chr == '[' || chr == ']'
+            || chr == '{' || chr == '}');
 }
 
 bool isOperation (char chr) {
-    return (chr == '+' || chr == '-' || chr == '*' || chr == '/' 
-            || chr == '=' || chr == '>' || chr == '<');
+    return (chr == '+' || chr == '-' || chr == '*' 
+            || chr == '/' || chr == '<' || chr == '='
+            || chr == '=' || chr == '>' );
 }
 
 bool notAccepted (char chr) {
