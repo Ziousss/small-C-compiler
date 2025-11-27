@@ -22,13 +22,16 @@ const char* tokenTypeToString(int type) {
         case TOK_LBRACE:        return "LEFT_BRACE";
         case TOK_RBRACE:        return "RIGHT_BRACE";
 
-        case TOK_COMMA:          return "COMMA"; 
+        case TOK_COMMA:         return "COMMA"; 
         case TOK_SEMICOLON:     return "SEMICOLON";
+        case TOK_DOUBLEPOINT:   return "DOOUBLEPOINT";
 
         case TOK_IF:            return "IF";
         case TOK_WHILE:         return "WHILE";
         case TOK_RETURN:        return "RETURN";
         case TOK_FUNC:          return "FUNC";
+        case TOK_FOR:           return "FOR";
+        case TOK_CASE:          return "CASE";
 
         case TOK_EOF:           return "EOF";
         case TOK_ERROR:         return "ERROR";
@@ -54,3 +57,12 @@ Tokenstruct *maketokenString (Tokenstruct *tokenlist, int count, Tokentype type,
     tokenlist[count].length = length;
     return tokenlist;
 }
+
+Keyword keywords[] = {
+    {"if", TOK_IF},
+    {"while", TOK_WHILE},
+    {"return", TOK_RETURN},
+    {"for", TOK_FOR},
+    {"case", TOK_CASE},
+    {NULL, 0} 
+};
