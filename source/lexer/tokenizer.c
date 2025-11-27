@@ -7,8 +7,11 @@ const char* tokenTypeToString(int type) {
         case KEYWORD:    return "KEYWORD";
         case OPERATOR:   return "OPERATOR";
         case DELIMITER:  return "DELIMITER";
-        case INTEGER:    return "INTEGER";
-        case UNIDENTIFIED: return "UNIDENTIFIED";
+        case INTEGER_LITERAL:    return "INTEGER";
+        case FLOAT_LITERAL:    return "FLOAT";
+        case CHAR_LITERAL:    return "CHAR";
+        case STRING_LITERAL:    return "STRING";
+        case UNIDENTIFIED: return "UNDENTIFIED";
         default: return "UNKNOWN";
     }
 }
@@ -64,6 +67,41 @@ Tokenstruct *lexicalAnalyzer (char* input) {
             continue;
         }
 
+        //Char literal
+        if (input[right] == '\'' && right+1 < len) { 
+            ++right;
+            int start = right;
+            while (input[right] != '\'' && right < len)
+            {
+                ++right;
+            }
+
+            char *sub = getSubstring(input, start, right-1);
+            tokenList = realloc(tokenList, sizeof(Tokenstruct)*(tokenCount+1));
+            tokenList[tokenCount].type = CHAR_LITERAL;
+            tokenList[tokenCount].lexeme = sub;
+            tokenCount++;
+            right++;
+            left = right;
+        }
+
+        //String literal
+        if (input[right] == '\"' && right+1 < len) { 
+            ++right;
+            int start = right;
+            while (input[right] != '\"' && right < len)
+            {
+                ++right;
+            }
+
+            char *sub = getSubstring(input, start, right-1);
+            tokenList = realloc(tokenList, sizeof(Tokenstruct)*(tokenCount+1));
+            tokenList[tokenCount].type = STRING_LITERAL;
+            tokenList[tokenCount].lexeme = sub;
+            tokenCount++;
+            right++;
+            left = right;
+        }
 
         if(!isDelimiter(input[right])){
             right++;
@@ -92,7 +130,6 @@ Tokenstruct *lexicalAnalyzer (char* input) {
         }
         else if ((isDelimiter(input[right]) && left != right) || (right == len && left != right)) {
             char *sub = getSubstring(input, left, right-1);
-
             if(isKeyword(sub)){
                 tokenList = realloc (tokenList, sizeof(Tokenstruct) * (tokenCount + 1));
                 tokenList[tokenCount].type = KEYWORD;
@@ -101,7 +138,7 @@ Tokenstruct *lexicalAnalyzer (char* input) {
             }
             else if (isInteger (sub)) {
                 tokenList = realloc (tokenList, sizeof(Tokenstruct) * (tokenCount + 1));
-                tokenList[tokenCount].type = INTEGER;
+                tokenList[tokenCount].type = INTEGER_LITERAL;
                 tokenList[tokenCount].lexeme = sub;
                 tokenCount++;
             }
@@ -118,6 +155,7 @@ Tokenstruct *lexicalAnalyzer (char* input) {
                 tokenCount++;
             }
             left = right;
+
         }
     }
 

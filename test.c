@@ -7,6 +7,7 @@ int main () {
     /* 
     this is a whole comment to understand the behavior
     */
+    char *sub = "THIS IS A TEST";
     int c = a + b;
     return c;
 
