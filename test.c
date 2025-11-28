@@ -1,3 +1,8 @@
 int main(){
-    char var1 ! 546;
+    if (!cool(me)){
+        me.coolness = false
+
+    } else {
+        me.coolness = true
+    }
 }

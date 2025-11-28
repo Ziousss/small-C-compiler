@@ -49,7 +49,7 @@ bool isKeyword (char *str) {
         {"auto", "for", "while", "if", "else", "char", 
           "int", "float", "double", "struct", "const", 
           "long", "break", "case", "do", "return", "static",
-          "sizeof", "void", "unsigned", "continue"};
+          "sizeof", "void", "unsigned", "continue", "true", "false"};
   
     for(int i = 0; i < sizeof(keyword)/sizeof(keyword[0]); i++){
         if (strcmp(str, keyword[i]) == 0){

@@ -2,7 +2,7 @@
 
 const char* tokenTypeToString(int type) {
     switch (type) {
-        case TOK_IDENTIFIER:         return "IDENTIFIER";
+        case TOK_IDENTIFIER:    return "IDENTIFIER";
         case INTEGER_LITERAL:   return "INTEGER_LITERAL";
         case FLOAT_LITERAL:     return "FLOAT_LITERAL";
         case CHAR_LITERAL:      return "CHAR_LITERAL";
@@ -37,10 +37,14 @@ const char* tokenTypeToString(int type) {
         case TOK_FUNC:          return "FUNC";
         case TOK_FOR:           return "FOR";
         case TOK_CASE:          return "CASE";
+        case TOK_ELSE:          return "ELSE";
 
         case TOK_INT:           return "INT_TYPE";
         case TOK_CHAR:          return "CHAR_TYPE";
         case TOK_VOID:          return "VOID_TYPE";
+
+        case TOK_TRUE:          return "TRUE";
+        case TOK_FALSE:         return "FALSE";
 
         case TOK_EOF:           return "EOF";
         case TOK_ERROR:         return "ERROR";
