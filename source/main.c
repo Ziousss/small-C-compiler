@@ -12,6 +12,8 @@ int main (int argc, char **argv) {
         return 1;
     }
 
-    Tokenstruct *token = lexicalAnalyzer(source);
+    Tokenstruct *tokenList = lexicalAnalyzer(source);
     free(source);
+
+
 }
