@@ -8,7 +8,9 @@
 #include "ast.h"
 #include "../lexer/tokenizer.h"
 
-ASTnode *makeFuncNode();
 bool isTOKType(Tokentype type);
+ASTnode *new_param_list();
+ASTnode *create_param_tree(char *name, Tokentype type, int count);
+void param_list_add(ASTnode *list, ASTnode *param);
 
 #endif
