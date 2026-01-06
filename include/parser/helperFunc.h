@@ -12,5 +12,7 @@ bool isTOKType(Tokentype type);
 ASTnode *new_param_list();
 ASTnode *create_param_tree(char *name, Tokentype type, int count);
 void param_list_add(ASTnode *list, ASTnode *param);
+ASTnode *new_stmt_list();
+void add_stmt_list(ASTnode *list, ASTnode *param);
 
 #endif

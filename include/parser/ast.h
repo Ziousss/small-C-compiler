@@ -17,8 +17,12 @@ typedef enum {
     AST_PARAM_LIST,
 
     AST_BLOCK,
+    AST_STMT_LIST,
     AST_RETURN,
     AST_EXPR_STMT,
+    AST_IF_STMT,
+    AST_FOR_STMT,
+    AST_WHILE_STMT,
 
     AST_BINARY_EXPR,
     AST_ASSIGN_EXPR,
@@ -33,6 +37,7 @@ typedef struct {
     Tokentype type;
 } AssignementNode;
 
+
 typedef struct {
     char operator;
     ASTnode* left;
@@ -40,9 +45,24 @@ typedef struct {
 } OperatorNode;
 
 typedef struct {
-    ASTnode** statements;
-    int stmt_count;
+    union {
+        struct {
+            ASTnode *first;
+        } block_list;
+
+        struct {
+            int stmt_count;
+            ASTnode *statement;
+        } stmt_type;
+    } data;
+    ASTnode *next;
 } BlockNode;
+
+typedef struct {
+    OperatorNode condition;
+    BlockNode block;
+} ifStatNode;
+
 
 typedef struct {
     union {

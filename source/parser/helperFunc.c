@@ -37,3 +37,24 @@ void param_list_add(ASTnode *list, ASTnode *param) {
 
     tmp->data.parameter.next = param;
 }
+
+ASTnode *new_stmt_list() {
+    ASTnode *tmp = malloc(sizeof(ASTnode));
+    tmp->type = AST_STMT_LIST;
+    tmp->data.block.data.block_list.first = NULL;
+    tmp->data.block.next = NULL;
+    return tmp;
+}
+
+void add_stmt_list(ASTnode *list, ASTnode *param) {
+    if (!list->data.block.data.block_list.first) {
+        list->data.block.data.block_list.first = param;
+        return;
+    }
+
+    ASTnode *tmp = list->data.block.data.block_list.first;
+    while (tmp->data.block.next)
+        tmp = tmp->data.block.next;
+
+    tmp->data.block.next = param;
+}
