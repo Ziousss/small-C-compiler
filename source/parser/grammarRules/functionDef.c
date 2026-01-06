@@ -1,5 +1,6 @@
 #include "../include/parser/ast.h"
 #include "../include/parser/grammarRules.h"
+#include "../include/parser/helperFunc.h"
 
 ASTnode *funcDefparse(Tokenstruct *tokenList, int *index){
     int i = *index;
@@ -16,14 +17,14 @@ ASTnode *funcDefparse(Tokenstruct *tokenList, int *index){
         printf("indentifier expected in the function definition, line %d", tokenList[i].line);
         return NULL;
     } 
-    char *name = tokenList[i].lexeme;
+    char *name = strdup(tokenList[i].lexeme);
     ++i;
 
     if(tokenList[i].type != TOK_LPAREN){
         printf(" \"(\" expected in the function definition, line %d", tokenList[i].line);
         return NULL;     
     } ++i;
-
+    
     ASTnode *parameters = NULL;
     if(tokenList[i].type == TOK_RPAREN){
         ++i;
@@ -39,6 +40,7 @@ ASTnode *funcDefparse(Tokenstruct *tokenList, int *index){
     }
 
     ASTnode *block = blockParse(tokenList, &i);
+
     if (block == NULL){
         return NULL; 
     }

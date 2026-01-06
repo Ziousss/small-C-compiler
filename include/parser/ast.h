@@ -14,6 +14,7 @@ typedef enum {
     AST_FUNC_DEF,
     AST_VAR_DECL,
     AST_PARAM_DECL,
+    AST_PARAM_LIST,
 
     AST_BLOCK,
     AST_RETURN,
@@ -27,19 +28,10 @@ typedef enum {
     AST_NUMBER,
 } NodeType;
 
-
-typedef struct {
-    double value;
-} NumberNode;
-
 typedef struct {
     char *name;
-} IdentifierNode;
-
-typedef struct {
-    ASTnode* indentifier;
-    ASTnode* expression;
-} AssignementNode; 
+    Tokentype type;
+} AssignementNode;
 
 typedef struct {
     char operator;
@@ -53,8 +45,19 @@ typedef struct {
 } BlockNode;
 
 typedef struct {
-    ASTnode** parameters;
-    int count;
+    union {
+        struct {
+            ASTnode *first;
+        }param_list;
+
+        struct {
+            int count;
+            Tokentype type;
+            char *name;
+        } param_decla;
+
+    }data;
+    ASTnode *next;
 } ParameterNode;
 
 typedef struct {
@@ -74,12 +77,10 @@ typedef struct {
 struct ASTnode {
     NodeType type;
     union {
-        NumberNode number;
         OperatorNode operator;
         FunctionDefNode function_def;
         FunctionCallNode function_call;
         BlockNode block;
-        IdentifierNode identifier;
         ParameterNode parameter;
         AssignementNode assignement;
     } data;
