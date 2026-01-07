@@ -7,11 +7,14 @@
 #include "../include/lexer/tokenizer.h"
 
 typedef struct ASTnode ASTnode;
+typedef struct ParameterNode ParameterNode;
+typedef struct ArgNode ArgNode;
 
 typedef enum {
     AST_PROGRAM,
 
     AST_FUNC_DEF,
+    AST_FUNC_CALL,
     AST_VAR_DECL,
     AST_PARAM_DECL,
     AST_PARAM_LIST,
@@ -32,78 +35,63 @@ typedef enum {
     AST_NUMBER,
 } NodeType;
 
-typedef struct {
+typedef struct ParameterNode {
+    Tokentype ret_type;
+    int count;
     char *name;
-    Tokentype type;
-} AssignementNode;
-
-
-typedef struct {
-    char operator;
-    ASTnode* left;
-    ASTnode* right;
-} OperatorNode;
-
-typedef struct {
-    union {
-        struct {
-            ASTnode *first;
-        } block_list;
-
-        struct {
-            int stmt_count;
-            ASTnode *statement;
-        } stmt_type;
-    } data;
-    ASTnode *next;
-} BlockNode;
-
-typedef struct {
-    OperatorNode condition;
-    BlockNode block;
-} ifStatNode;
-
-
-typedef struct {
-    union {
-        struct {
-            ASTnode *first;
-        }param_list;
-
-        struct {
-            int count;
-            Tokentype type;
-            char *name;
-        } param_decla;
-
-    }data;
-    ASTnode *next;
+    ParameterNode *next;
 } ParameterNode;
 
-typedef struct {
-    char *name;
-    Tokentype return_type;
-    ASTnode *parameters;
-    ASTnode *body;
-} FunctionDefNode;
+typedef struct ArgNode {
+    ASTnode *expression;
+    ArgNode *next;
+} ArgNode;
 
-typedef struct {
-    char *name;
-    ASTnode** arguments;
-    int arg_count;
-} FunctionCallNode;
-
-// Main AST node
-struct ASTnode {
-    NodeType type;
+typedef struct ASTnode {
+    NodeType ast_type;
     union {
-        OperatorNode operator;
-        FunctionDefNode function_def;
-        FunctionCallNode function_call;
-        BlockNode block;
-        ParameterNode parameter;
-        AssignementNode assignement;
+        struct { 
+            char *name; 
+        } identifier;
+
+        struct { 
+            int value; 
+        } int_literal;
+        
+        struct { 
+            Tokentype op; 
+            ASTnode *left; 
+            ASTnode *right; 
+        } binary;
+        
+        struct { 
+            char *name; 
+            ArgNode *args; 
+        } func_call;
+        
+        struct { 
+            ASTnode *target; 
+            ASTnode *value; 
+        } assign;
+        
+        struct { 
+            ASTnode *stmts; 
+        } block;
+        
+        struct { 
+            ASTnode *expr; 
+        } return_node;
+        
+        struct { 
+            char *name; 
+            Tokentype return_type; 
+            ParameterNode *parameters; 
+            ASTnode *body; 
+        } func_def;
     } data;
-};
+
+    struct ASTnode *next; 
+} ASTnode;
+
 
 #endif
