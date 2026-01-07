@@ -5,8 +5,7 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(include)
 
-# include all C files in source/ and source/lexer/
-file(GLOB SOURCES "source/*.c" "source/lexer/*.c" "source/parser/*.c")
+file(GLOB SOURCES "source/*.c" "source/lexer/*.c" "source/parser/*.c" "source/parser/grammarRules/*.c")
 
 add_executable(compiler ${SOURCES})
 
