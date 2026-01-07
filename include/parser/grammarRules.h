@@ -10,7 +10,7 @@
 #include "../lexer/tokenizer.h"
 
 ASTnode *funcDefparse(Tokenstruct *tokenList, int *index);
-ASTnode *parameterParse(Tokenstruct *tokenList, int *index);
+ParameterNode *parameterParse(Tokenstruct *tokenList, int *index);
 ASTnode *blockParse(Tokenstruct *tokenList, int *index);
 
 #endif

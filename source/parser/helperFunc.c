@@ -7,54 +7,39 @@ bool isTOKType(Tokentype type){
     return true;
 }
 
-ASTnode *create_param_tree(char *name, Tokentype type, int count){
-    ASTnode *tmp = malloc(sizeof(ASTnode));
-    tmp->type = AST_PARAM_DECL;
-    tmp->data.parameter.data.param_decla.type = type;
-    tmp->data.parameter.data.param_decla.name = name;
-    tmp->data.parameter.data.param_decla.count = count;
-    tmp->data.parameter.next = NULL;
+ParameterNode *create_param_tree(char *name, Tokentype type, int count){
+    ParameterNode *tmp = malloc(sizeof(ParameterNode));
+    tmp->next = NULL;
+    tmp->count = count;
+    tmp->name = name;
+    tmp->ret_type = type;
     return tmp;
 }
 
-ASTnode *new_param_list() {
-    ASTnode *tmp = malloc(sizeof(ASTnode));
-    tmp->type = AST_PARAM_LIST;
-    tmp->data.parameter.data.param_list.first = NULL;
-    tmp->data.parameter.next = NULL;
-    return tmp;
-}
-
-void param_list_add(ASTnode *list, ASTnode *param) {
-    if (!list->data.parameter.data.param_list.first) {
-        list->data.parameter.data.param_list.first = param;
+void param_list_add(ParameterNode **head, ParameterNode *param) {
+    if(*head == NULL){
+        *head = param;
         return;
     }
 
-    ASTnode *tmp = list->data.parameter.data.param_list.first;
-    while (tmp->data.parameter.next)
-        tmp = tmp->data.parameter.next;
-
-    tmp->data.parameter.next = param;
+    ParameterNode *cur = *head;
+    while(cur->next){
+        cur = cur->next;
+    }
+    cur->next = param;
 }
 
 ASTnode *new_stmt_list() {
     ASTnode *tmp = malloc(sizeof(ASTnode));
-    tmp->type = AST_STMT_LIST;
-    tmp->data.block.data.block_list.first = NULL;
-    tmp->data.block.next = NULL;
+    tmp->ast_type = AST_STMT_LIST;
+    tmp->data.block.stmts = NULL;
     return tmp;
 }
 
-void add_stmt_list(ASTnode *list, ASTnode *param) {
-    if (!list->data.block.data.block_list.first) {
-        list->data.block.data.block_list.first = param;
-        return;
-    }
+void add_stmt_list(ASTnode *list, ASTnode *stmt) {
+    ASTnode *tmp = list->data.block.stmts->next;
+    while (tmp->data.block.stmts->next)
+        tmp = tmp->data.block.stmts->next;
 
-    ASTnode *tmp = list->data.block.data.block_list.first;
-    while (tmp->data.block.next)
-        tmp = tmp->data.block.next;
-
-    tmp->data.block.next = param;
+    tmp->data.block.stmts->next = stmt;
 }
