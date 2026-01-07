@@ -25,7 +25,7 @@ ASTnode *funcDefparse(Tokenstruct *tokenList, int *index){
         return NULL;     
     } ++i;
     
-    ASTnode *parameters = NULL;
+    ParameterNode *parameters = NULL;
     if(tokenList[i].type == TOK_RPAREN){
         ++i;
         
@@ -47,11 +47,11 @@ ASTnode *funcDefparse(Tokenstruct *tokenList, int *index){
 
     //all good, we can create the node
     ASTnode *func_def_ast = malloc(sizeof(ASTnode));
-    func_def_ast->type = AST_FUNC_DEF;
-    func_def_ast->data.function_def.body = block;
-    func_def_ast->data.function_def.name = name;
-    func_def_ast->data.function_def.parameters = parameters;
-    func_def_ast->data.function_def.return_type = return_type;
+    func_def_ast->ast_type = AST_FUNC_DEF;
+    func_def_ast->data.func_def.body = block;
+    func_def_ast->data.func_def.name = name;
+    func_def_ast->data.func_def.parameters = parameters;
+    func_def_ast->data.func_def.return_type = return_type;
     *index = i;
 
     return func_def_ast;

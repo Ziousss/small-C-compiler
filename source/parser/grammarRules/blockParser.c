@@ -54,7 +54,7 @@ ASTnode *blockParse(Tokenstruct *tokenList, int *index){
             continue;
         }  
         if (i == start_i) {
-            printf("Unexpected token '%s' in block at line %d\n",tokenTypeToString(tokenList[i].type), tokenList[i].line);
+            printf("Unexpected token '%s' in block at line %d\n or error if error message.",tokenTypeToString(tokenList[i].type), tokenList[i].line);
             return NULL;
         }
     }

@@ -2,10 +2,10 @@
 #include "../include/parser/grammarRules.h"
 #include "../include/parser/helperFunc.h"
 
-ASTnode *parameterParse(Tokenstruct *tokenList, int *index){
+ParameterNode *parameterParse(Tokenstruct *tokenList, int *index){
     int i = *index;
     int count = 0;
-    ASTnode *param_list = new_param_list();
+    ASTnode *param_list = NULL;
 
     while(true){
         if(!isTOKType(tokenList[i].type)){
@@ -22,7 +22,7 @@ ASTnode *parameterParse(Tokenstruct *tokenList, int *index){
         char *name = strdup(tokenList[i].lexeme);
         ++i;
 
-        ASTnode *tmp = create_param_tree(name, type, count++);
+        ParameterNode *tmp = create_param_tree(name, type, count++);
         param_list_add(param_list, tmp);
 
         if(tokenList[i].type == TOK_COMMA){
