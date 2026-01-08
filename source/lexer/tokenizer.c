@@ -45,7 +45,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                     case '[': maketokenChar(tokenList, tokencount, TOK_LSQRTBRAK, input[right], 1, line);break;
                     case ']': maketokenChar(tokenList, tokencount, TOK_RSQRTBRAK, input[right], 1, line);break;
                     case ':': maketokenChar(tokenList, tokencount, TOK_DOUBLEPOINT, input[right], 1, line);break;
-                    default: maketokenChar(tokenList, tokencount, UNIDENTIFIED, input[right], 1, line);break;
+                    default: maketokenChar(tokenList, tokencount, TOK_UNIDENTIFIED, input[right], 1, line);break;
                 }
                 right++;
                 
@@ -97,7 +97,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                             break;
                         }
 
-                    default: maketokenChar(tokenList, tokencount, UNIDENTIFIED, input[right], 1, line);break;
+                    default: maketokenChar(tokenList, tokencount, TOK_UNIDENTIFIED, input[right], 1, line);break;
                     
                 }
                 right++;
@@ -118,7 +118,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                 tokenList = realloc(tokenList, sizeof(Tokenstruct)*(tokencount+1));
                 char *sub = getSubstring(input,start,right-1);
                 int sublen = strlen(sub);
-                maketokenString(tokenList,tokencount,CHAR_LITERAL, sub,sublen, line);
+                maketokenString(tokenList,tokencount,TOK_CHAR_LITERAL, sub,sublen, line);
                 right++;
                 left = right;
                 tokencount++;
@@ -134,7 +134,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                 tokenList = realloc(tokenList, sizeof(Tokenstruct)*(tokencount+1));
                 char *sub = getSubstring(input, start,right-1);
                 int sublen = strlen(sub);
-                maketokenString(tokenList, tokencount, INTEGER_LITERAL, sub, sublen,line);
+                maketokenString(tokenList, tokencount, TOK_INTEGER_LITERAL, sub, sublen,line);
 
                 left = right;
                 tokencount++;
@@ -152,7 +152,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                 tokenList = realloc(tokenList, sizeof(Tokenstruct)*(tokencount+1));
                 char *sub = getSubstring(input,start,right-1);
                 int sublen = strlen(sub);
-                maketokenString(tokenList,tokencount,STRING_LITERAL, sub,sublen, line);
+                maketokenString(tokenList,tokencount,TOK_STRING_LITERAL, sub,sublen, line);
                 right++;
                 left = right;
                 tokencount++;

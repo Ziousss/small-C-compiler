@@ -2,54 +2,54 @@
 
 const char* tokenTypeToString(int type) {
     switch (type) {
-        case TOK_IDENTIFIER:    return "IDENTIFIER";
-        case INTEGER_LITERAL:   return "INTEGER_LITERAL";
-        case FLOAT_LITERAL:     return "FLOAT_LITERAL";
-        case CHAR_LITERAL:      return "CHAR_LITERAL";
-        case STRING_LITERAL:    return "STRING_LITERAL";
-        case UNIDENTIFIED:      return "UNIDENTIFIED";
+        case TOK_IDENTIFIER:        return "IDENTIFIER";
+        case TOK_INTEGER_LITERAL:   return "INTEGER_LITERAL";
+        case TOK_FLOAT_LITERAL:     return "FLOAT_LITERAL";
+        case TOK_CHAR_LITERAL:      return "CHAR_LITERAL";
+        case TOK_STRING_LITERAL:    return "STRING_LITERAL";
+        case TOK_UNIDENTIFIED:      return "UNIDENTIFIED";
 
-        case TOK_PLUS:          return "PLUS";
-        case TOK_PLUSEQ:        return "PLUSEQ";
-        case TOK_MINUS:         return "MINUS";
-        case TOK_MINUSEQ:       return "MINUSEQ";
-        case TOK_STAR:          return "STAR";
-        case TOK_SLASH:         return "SLASH";
-        case TOK_UNEQ:          return "UNEQ";
-
-        case TOK_EQ:            return "EQUAL";
-        case TOK_EQEQ:          return "EQUAL_EQUAL";
-
-        case TOK_LPAREN:        return "LEFT_PAREN";
-        case TOK_RPAREN:        return "RIGHT_PAREN";
-        case TOK_LBRACE:        return "LEFT_BRACE";
-        case TOK_RBRACE:        return "RIGHT_BRACE";
-
-        case TOK_COMMA:         return "COMMA"; 
-        case TOK_SEMICOLON:     return "SEMICOLON";
-        case TOK_DOUBLEPOINT:   return "DOOUBLEPOINT";
-        case TOK_EXCLAMATION:   return "EXCLAMATION";
-        case TOK_DOT:           return "DOT";
-
-        case TOK_IF:            return "IF";
-        case TOK_WHILE:         return "WHILE";
-        case TOK_RETURN:        return "RETURN";
-        case TOK_FUNC:          return "FUNC";
-        case TOK_FOR:           return "FOR";
-        case TOK_CASE:          return "CASE";
-        case TOK_ELSE:          return "ELSE";
-
-        case TOK_INT:           return "INT_TYPE";
-        case TOK_CHAR:          return "CHAR_TYPE";
-        case TOK_VOID:          return "VOID_TYPE";
-
-        case TOK_TRUE:          return "TRUE";
-        case TOK_FALSE:         return "FALSE";
-
-        case TOK_EOF:           return "EOF";
-        case TOK_ERROR:         return "ERROR";
-
-        default:                return "NOT NAMED YET";
+        case TOK_PLUS:              return "PLUS";
+        case TOK_PLUSEQ:            return "PLUSEQ";
+        case TOK_MINUS:             return "MINUS";
+        case TOK_MINUSEQ:           return "MINUSEQ";
+        case TOK_STAR:              return "STAR";
+        case TOK_SLASH:             return "SLASH";
+        case TOK_UNEQ:              return "UNEQ";
+        
+        case TOK_EQ:                return "EQUAL";
+        case TOK_EQEQ:              return "EQUAL_EQUAL";
+        
+        case TOK_LPAREN:            return "LEFT_PAREN";
+        case TOK_RPAREN:            return "RIGHT_PAREN";
+        case TOK_LBRACE:            return "LEFT_BRACE";
+        case TOK_RBRACE:            return "RIGHT_BRACE";
+        
+        case TOK_COMMA:             return "COMMA"; 
+        case TOK_SEMICOLON:         return "SEMICOLON";
+        case TOK_DOUBLEPOINT:       return "DOOUBLEPOINT";
+        case TOK_EXCLAMATION:       return "EXCLAMATION";
+        case TOK_DOT:               return "DOT";
+        
+        case TOK_IF:                return "IF";
+        case TOK_WHILE:             return "WHILE";
+        case TOK_RETURN:            return "RETURN";
+        case TOK_FUNC:              return "FUNC";
+        case TOK_FOR:               return "FOR";
+        case TOK_CASE:              return "CASE";
+        case TOK_ELSE:              return "ELSE";
+        
+        case TOK_INT:               return "INT_TYPE";
+        case TOK_CHAR:              return "CHAR_TYPE";
+        case TOK_VOID:              return "VOID_TYPE";
+        
+        case TOK_TRUE:              return "TRUE";
+        case TOK_FALSE:             return "FALSE";
+        
+        case TOK_EOF:               return "EOF";
+        case TOK_ERROR:             return "ERROR";
+        
+        default:                    return "NOT NAMED YET";
     }
 }
 

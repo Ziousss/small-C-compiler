@@ -12,7 +12,7 @@ bool isDelimiter (char chr) {
 bool isOperation (char chr) {
     return (chr == '+' || chr == '-' || chr == '*' 
             || chr == '/' || chr == '<' || chr == '='
-            || chr == '=' || chr == '>' || chr == '!');
+            || chr == '>' || chr == '!');
 }
 
 bool notAccepted (char chr) {
