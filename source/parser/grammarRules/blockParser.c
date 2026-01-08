@@ -21,7 +21,7 @@ ASTnode *blockParse(Tokenstruct *tokenList, int *index){
                 continue;
             }
 
-            ASTnode *assignment = assignParser(tokenList, &i);
+            ASTnode *assignment = assignParse(tokenList, &i);
             if(assignment != NULL){
                 add_stmt_list(stmt_list,last, assignment, AST_ASSIGN_EXPR);
                 continue;
