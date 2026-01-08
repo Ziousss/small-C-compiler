@@ -7,6 +7,11 @@ bool isTOKType(Tokentype type){
     return true;
 }
 
+bool isOperatorExpression (Tokentype type) {
+    return (type == TOK_PLUS || type == TOK_MINUS || type == TOK_STAR || type == TOK_SLASH);
+}
+
+
 ParameterNode *create_param_tree(char *name, Tokentype type, int count){
     ParameterNode *tmp = malloc(sizeof(ParameterNode));
     tmp->next = NULL;
