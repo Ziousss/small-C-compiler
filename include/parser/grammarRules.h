@@ -18,5 +18,7 @@ ASTnode *assignParse(Tokenstruct *tokenList, int *index);
 ASTnode *expressionParse(Tokenstruct *tokenList, int *index);
 ASTnode *ifStmtParse(Tokenstruct *tokenList, int *index);
 ASTnode *forStmtParse(Tokenstruct *tokenList, int *index);
+ASTnode *whileStmtParse(Tokenstruct *tokenList, int *index);
+ASTnode *returnStmtParse(Tokenstruct *tokenList, int *index);
 
 #endif
