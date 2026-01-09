@@ -6,7 +6,7 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
     int i = *index;
     
     if(!isTOKType(tokenList[i].type)){
-        printf("type expected in the function definitionn, line %d", tokenList[i].line);
+        printf("type expected in the function definition, line %d", tokenList[i].line);
         return NULL;
     }
     Tokentype return_type = tokenList[i].type; 
@@ -27,7 +27,6 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
     ParameterNode *parameters = NULL;
     if(tokenList[i].type == TOK_RPAREN){
         ++i;
-        
     } else {
         parameters = parameterParse(tokenList, &i);
         if (parameters == NULL){
@@ -53,5 +52,7 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
     func_def_ast->data.func_def.return_type = return_type;
     *index = i;
 
+    //debugging
+    printf("Returning FuncDefParse\n");    
     return func_def_ast;
 }

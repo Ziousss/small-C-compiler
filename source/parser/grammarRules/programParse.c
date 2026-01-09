@@ -8,14 +8,15 @@ ASTnode *programParse(Tokenstruct *tokenList, int *index){
     program->ast_type = AST_PROGRAM;
     program->data.program_node.func_def = NULL;
     ASTnode **tail = &program->data.program_node.func_def;
-    while(true){
-        ASTnode *func_call = funcDefParse(tokenList, &i);
-        if(func_call == NULL){
-            break;
+    while(tokenList[i].type != TOK_EOF){
+        ASTnode *func_def = funcDefParse(tokenList, &i);
+        if(func_def == NULL){
+            printf("This funcDef is NULL\n");
+            return NULL;
         }
 
         ASTnode *node = malloc(sizeof(ASTnode));
-        node->data.program_node.func_def = func_call;
+        node->data.program_node.func_def = func_def;
         node->next = NULL;
 
         *tail = node;
@@ -23,5 +24,8 @@ ASTnode *programParse(Tokenstruct *tokenList, int *index){
     }
 
     *index = i;
+    //debugging
+    printf("Returning programParse\n");
+    prinast(program);
     return program;
 }

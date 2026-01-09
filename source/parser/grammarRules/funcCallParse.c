@@ -17,6 +17,10 @@ ASTnode *funcCallParse(Tokenstruct *tokenList, int *index){
         return NULL;
     } ++i;
 
+    if(tokenList[i].type == TOK_SEMICOLON){
+        printf("Missing a ')' line %d for the function call\n", tokenList[i].line);
+        return NULL;
+    }
     if (tokenList[i].type == TOK_RPAREN)
     {
         funcCall->data.func_call.name = name;
@@ -28,7 +32,7 @@ ASTnode *funcCallParse(Tokenstruct *tokenList, int *index){
             ArgNode *arg = malloc(sizeof(ArgNode));
             ASTnode *expression = expressionParse(tokenList, &i);
             if(expression == NULL){
-                printf("Issue in the expressions of function calls line %d", tokenList[i].line);
+                printf("Issue in the expressions of function calls line %d\n", tokenList[i].line);
                 return NULL;
             }
             arg->expression = expression;
@@ -51,10 +55,19 @@ ASTnode *funcCallParse(Tokenstruct *tokenList, int *index){
             }
 
         }
-    }
+    }++i;
+
+    if(tokenList[i].type != TOK_SEMICOLON){
+        free(funcCall);
+        printf("Missing semi colon line %d after the function call\n", tokenList[i].line);
+    } ++i;
+
     *index = i;
     funcCall->data.func_call.args = args;
     funcCall->ast_type = AST_FUNC_CALL;
     funcCall->data.func_call.name = name;
+
+    //debugging
+    printf("Returning FuncCallParse\n");
     return funcCall;
 }

@@ -18,12 +18,12 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         ++i; 
     }
     else if(tokenList[i].type == TOK_INTEGER_LITERAL){
-        left->ast_type = AST_NUMBER;
         left = malloc(sizeof(ASTnode));
         if(left == NULL){
             printf("Malloc error in expression parser (operator)\n");
             return NULL;
         }
+        left->ast_type = AST_NUMBER;
         left->data.int_literal.value = atoi(tokenList[i].lexeme);
         ++i;
     }
@@ -68,5 +68,8 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
     }
 
     *index = i;
+
+    //debugging
+    printf("Returning expressionParse\n");
     return left;
 }

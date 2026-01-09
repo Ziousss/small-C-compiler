@@ -1,10 +1,7 @@
 #include "../include/parser/helperFunc.h"
 
 bool isTOKType(Tokentype type){
-    if(type != TOK_INT && type != TOK_CHAR && type != TOK_VOID){
-        return false;
-    }
-    return true;
+    return (type == TOK_INT || type == TOK_VOID || type == TOK_CHAR);
 }
 
 bool isOperatorExpression (Tokentype type) {
@@ -34,14 +31,42 @@ void param_list_add(ParameterNode **head, ParameterNode *param) {
     cur->next = param;
 }
 
-void add_stmt_list(ASTnode *head, ASTnode *last, ASTnode *stmt, Tokentype ast_type) {
-    if (head == NULL){
-        head = stmt;
-        head->ast_type = ast_type;
-    } else {
-        last->next = stmt;
-        last->next->ast_type = ast_type;
-    }
+void add_stmt_list(ASTnode **head, ASTnode **last, ASTnode *stmt, Tokentype ast_type) {
+    stmt->ast_type = ast_type;
+    stmt->next = NULL;
 
-    last = stmt;
+    if (*head == NULL){
+        *head = stmt;
+        *last = stmt;
+    } else {
+        (*last)->next = stmt;
+        *last = stmt;
+    }
+}
+
+void prinast(ASTnode *node){
+    if(node == NULL){
+        printf("NULL");
+        return;
+    }
+    printf("not NULL");
+}
+
+const char* astTypeToString(int type) {
+    switch (type) {
+        case AST_ASSIGN_EXPR:       return "ASSIGN_AST";
+        case AST_BINARY_EXPR:       return "BINARY_AST";
+        case AST_BLOCK:             return "BLOCK_AST";
+        case AST_CALL_EXPR:         return "CALL_EXPR_AST";
+        case AST_EXPR_STMT:         return "EXPR_STMT_AST";
+        case AST_FOR_STMT:          return "FOR_STMT_AST";
+
+        case AST_FUNC_CALL:         return "FUNC_CALL_AST";
+        case AST_FUNC_DEF:          return "FUNC_DEF_AST";
+        case AST_IDENTIFIER:        return "IDENTIFIER_AST";
+        case AST_IF_STMT:           return "IF_STMT_AST";
+        case AST_NUMBER:            return "NUMBER_AST";
+
+        default:                    return "NOT_NAMED_YET";
+    }
 }

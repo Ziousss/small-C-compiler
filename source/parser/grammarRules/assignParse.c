@@ -24,8 +24,8 @@ ASTnode *assignParse(Tokenstruct *tokenList, int *index){
     if(tokenList[i].type != TOK_SEMICOLON){
         printf("Semicolon expected line %d\n", tokenList[i].line);
         return NULL;
-    }
-    
+    }++i;
+
     ASTnode *assigneNode = malloc(sizeof(ASTnode));
     if(assigneNode == NULL){
         printf("Malloc error in assignParse.\n");
@@ -35,5 +35,8 @@ ASTnode *assignParse(Tokenstruct *tokenList, int *index){
     assigneNode->ast_type = AST_ASSIGN_EXPR;
     assigneNode->data.assign.target = target;
     assigneNode->data.assign.value = value;
+
+    //debugging
+    printf("Returning assignParse\n");
     return assigneNode;
 }

@@ -10,26 +10,25 @@ ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
     ++i;
 
     if(tokenList[i].type != TOK_IDENTIFIER){
-        printf("Identifier expected line %d", tokenList[i].line);
+        printf("Identifier expected line %d\n", tokenList[i].line);
         return NULL;
     }
     int name_i = i;
     ++i;
-
+    
     if(tokenList[i].type == TOK_EQ){
         ++i;
         expression = expressionParse(tokenList, &i);
         if (expression == NULL){
-            printf("expression expected after '=' line %d", tokenList[i].line);
+            printf("expression expected after '=' line %d\n", tokenList[i].line);
             return NULL;
         }
     }
 
     if(tokenList[i].type != TOK_SEMICOLON){
-        printf("Semicolon expected line %d", tokenList[i].line);
+        printf("Semicolon expected line %d\n", tokenList[i].line);
         return NULL;
     } ++i;
-
     char *name = strdup(tokenList[name_i].lexeme);
 
     *index = i;
@@ -39,5 +38,7 @@ ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
     declaration->data.declaration.identifier = name;
     declaration->data.declaration.type = decla_type;
 
+    //debugging
+    printf("Returning delcarationParse\n");
     return declaration;
 }
