@@ -138,15 +138,23 @@ Tokenstruct *lexicalAnalyzer(char *input){
             {
                 right++;
                 int start = right;
-                while (input[right] != '\'' && right+1 , len)
-                {
-                    right++;
+                if(input[right] == '\\'){
+                    ++right;
                 }
+
                 tokenList = realloc(tokenList, sizeof(Tokenstruct)*(tokencount+1));
-                char *sub = getSubstring(input,start,right-1);
+                char *sub = getSubstring(input,start,right);
                 int sublen = strlen(sub);
                 maketokenString(tokenList,tokencount,TOK_CHAR_LITERAL, sub,sublen, line);
                 right++;
+                if(input[right] != '\''){
+                    if(input[right] == ';'){
+                        printf("Missing a second ' in line %d for the character literal.\n", line);
+                        return NULL;
+                    }
+                    printf("Char literal line %d can only contain one character or two including the first one being '\\'.\n", line);
+                    return NULL;
+                } ++right;
                 left = right;
                 tokencount++;
                 continue;

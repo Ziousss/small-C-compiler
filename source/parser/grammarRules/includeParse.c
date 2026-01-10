@@ -2,6 +2,8 @@
 #include "../include/parser/grammarRules.h"
 #include "../include/parser/helperFunc.h"
 
+//Did for fun before knowing the preprocessor ...
+//Not gonna implement it for real right now.
 ASTnode *includeParse(Tokenstruct *tokenList, int *index){
     int i = *index;
 

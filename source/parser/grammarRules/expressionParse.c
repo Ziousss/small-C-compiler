@@ -20,7 +20,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         else{
             left = malloc(sizeof(ASTnode));
             if(left == NULL){
-                printf("Malloc error in expression parser (operator)\n");
+                printf("Malloc error in expression parser (identifier)\n");
                 free(name);
                 return NULL;
             }
@@ -32,7 +32,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
     else if(tokenList[i].type == TOK_INTEGER_LITERAL){
         left = malloc(sizeof(ASTnode));
         if(left == NULL){
-            printf("Malloc error in expression parser (operator)\n");
+            printf("Malloc error in expression parser (integer_literal)\n");
             return NULL;
         }
         left->ast_type = AST_NUMBER;
@@ -51,6 +51,31 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         }
         ++i;
     } 
+    else if(tokenList[i].type == TOK_CHAR_LITERAL){
+        left = malloc(sizeof(ASTnode));
+        if(left == NULL){
+            printf("Malloc error in expression parser (char_literal)\n");
+            return NULL;
+        }
+        char chr = tokenList[i].lexeme[0];
+        left->ast_type = AST_CHAR_LITERAL;
+        left->data.character_literal.character = chr;
+        ++i;
+    }
+    else if(tokenList[i].type == TOK_STRING_LITERAL){
+        left = malloc(sizeof(ASTnode));
+            if(left == NULL){
+                printf("Malloc error in expression parser (string_literal)\n");
+                return NULL;
+            }
+        char *string = strdup(tokenList[i].lexeme);
+        left->ast_type = AST_STRING_LITERAL;
+        left->data.string_literal.string = string;
+        ++i;
+        if(left == NULL){
+            printf("NULL");
+        }
+    }
     else {
         printf("expression expected line %d\n", tokenList[i].line);
         return NULL;
