@@ -179,7 +179,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                     }
                     right++;
                 }
-
+                
                 char *sub = getSubstring(input,start,right-1);
                 int sublen = strlen(sub);
 
@@ -207,6 +207,7 @@ Tokenstruct *lexicalAnalyzer(char *input){
                     maketokenString(tokenList,tokencount++,TOK_STRING_LITERAL, sub,sublen, line);
                     
                 }
+                
                 right++;
                 left = right;
                 continue;

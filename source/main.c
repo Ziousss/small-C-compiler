@@ -14,6 +14,9 @@ int main (int argc, char **argv) {
     }
 
     Tokenstruct *tokenList = lexicalAnalyzer(source);
+    if(tokenList == NULL){
+        return 1;
+    }
     free(source);
 
     int index = 0;
@@ -24,5 +27,4 @@ int main (int argc, char **argv) {
     }
 
     return 0;
-
 }

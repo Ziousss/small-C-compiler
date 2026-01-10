@@ -26,7 +26,7 @@ ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
     }
 
     if(tokenList[i].type != TOK_SEMICOLON){
-        printf("Semicolon expected line %d\n", tokenList[i].line);
+        printf("Semicolon expected line %d\n", tokenList[i-1].line);
         return NULL;
     } ++i;
     char *name = strdup(tokenList[name_i].lexeme);
