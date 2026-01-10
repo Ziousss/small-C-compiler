@@ -46,10 +46,10 @@ void add_stmt_list(ASTnode **head, ASTnode **last, ASTnode *stmt, Tokentype ast_
 
 void prinast(ASTnode *node){
     if(node == NULL){
-        printf("NULL");
+        printf("programAST is NULL.\n");
         return;
     }
-    printf("not NULL");
+    printf("programAST is not NULL.\n");
 }
 
 const char* astTypeToString(int type) {

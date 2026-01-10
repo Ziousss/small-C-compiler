@@ -13,7 +13,7 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
     ++i;
 
     if(tokenList[i].type != TOK_IDENTIFIER){
-        printf("indentifier expected in the function definition, line %d\n", tokenList[i].line);
+        printf("Indentifier expected in the function definition, line %d\n", tokenList[i].line);
         return NULL;
     } 
     char *name = strdup(tokenList[i].lexeme);
@@ -52,7 +52,5 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
     func_def_ast->data.func_def.return_type = return_type;
     *index = i;
 
-    //debugging
-    printf("Returning FuncDefParse\n");    
     return func_def_ast;
 }

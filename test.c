@@ -1,4 +1,4 @@
-int main(){
-    i = 5;
-    foo();
+int main(int i, char character){
+    cool = foo() + 5;
 }
+

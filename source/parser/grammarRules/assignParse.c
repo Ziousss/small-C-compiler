@@ -36,7 +36,5 @@ ASTnode *assignParse(Tokenstruct *tokenList, int *index){
     assigneNode->data.assign.target = target;
     assigneNode->data.assign.value = value;
 
-    //debugging
-    printf("Returning assignParse\n");
     return assigneNode;
 }

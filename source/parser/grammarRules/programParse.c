@@ -23,8 +23,6 @@ ASTnode *programParse(Tokenstruct *tokenList, int *index){
     }
 
     *index = i;
-    //debugging
-    printf("Returning programParse\n");
     prinast(program);
     return program;
 }

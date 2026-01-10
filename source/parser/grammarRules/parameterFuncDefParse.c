@@ -43,7 +43,5 @@ ParameterNode *parameterFuncDefParse(Tokenstruct *tokenList, int *index){
     }  
     *index = i;
 
-    //debugging
-    printf("Returning parameterParse\n");
     return param_list;
 }

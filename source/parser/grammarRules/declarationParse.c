@@ -38,7 +38,5 @@ ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
     declaration->data.declaration.identifier = name;
     declaration->data.declaration.type = decla_type;
 
-    //debugging
-    printf("Returning delcarationParse\n");
     return declaration;
 }
