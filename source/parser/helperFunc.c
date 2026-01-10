@@ -5,7 +5,7 @@ bool isTOKType(Tokentype type){
 }
 
 bool isOperatorExpression (Tokentype type) {
-    return (type == TOK_PLUS || type == TOK_MINUS || type == TOK_STAR || type == TOK_SLASH);
+    return (type == TOK_PLUS || type == TOK_MINUS || type == TOK_STAR || type == TOK_SLASH || type == TOK_EQEQ);
 }
 
 

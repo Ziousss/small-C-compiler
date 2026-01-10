@@ -11,6 +11,7 @@ ASTnode *programParse(Tokenstruct *tokenList, int *index){
     while(tokenList[i].type != TOK_EOF){
         ASTnode *func_def = funcDefParse(tokenList, &i);
         if(func_def == NULL){
+            printf("NULL\n");
             return NULL;
         }
 

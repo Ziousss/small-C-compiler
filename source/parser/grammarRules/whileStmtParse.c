@@ -15,8 +15,8 @@ ASTnode *whileStmtParse(Tokenstruct *tokenList, int *index){
     }++i;
 
     ASTnode *condition = expressionParse(tokenList, &i);
-    if(condition == NULL){
-        printf("Issue with the expression condition in line %d\n", tokenList[i].line);
+    if(condition == NULL || condition->data.binary.right == NULL){
+        printf("Issue with the while condition in line %d, the wrong token is %s\n", tokenList[i].line, tokenTypeToString(tokenList[i].type));
         return NULL;
     }
 
@@ -25,7 +25,7 @@ ASTnode *whileStmtParse(Tokenstruct *tokenList, int *index){
         return NULL;
     }++i;
 
-    ASTnode *block = blockParse(tokenList, &i);
+    ASTnode *block = blockParse(tokenList, &i, "while");
     if(block == NULL){
         printf("Issue in the block parsing of the while statement.\n");
         return NULL;

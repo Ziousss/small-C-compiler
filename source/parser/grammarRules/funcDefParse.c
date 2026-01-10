@@ -23,11 +23,16 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
         printf(" \"(\" expected in the function definition, line %d\n", tokenList[i].line);
         return NULL;     
     } ++i;
-    
+
     ParameterNode *parameters = NULL;
     if(tokenList[i].type == TOK_RPAREN){
         ++i;
-    } else {
+    } 
+    else if(!isTOKType(tokenList[i].type)){
+        printf("Missing ')' on line %d in the function definition.\n", tokenList[i].line);
+        return NULL;
+    }
+    else {
         parameters = parameterFuncDefParse(tokenList, &i);
         if (parameters == NULL){
             return NULL;
@@ -37,7 +42,7 @@ ASTnode *funcDefParse(Tokenstruct *tokenList, int *index){
         }++i;
     }
 
-    ASTnode *block = blockParse(tokenList, &i);
+    ASTnode *block = blockParse(tokenList, &i, name);
 
     if (block == NULL){
         return NULL; 

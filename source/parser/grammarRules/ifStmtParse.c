@@ -26,14 +26,14 @@ ASTnode *ifStmtParse(Tokenstruct *tokenList, int *index){
         return NULL;
     } ++i;
 
-    ASTnode *if_block = blockParse(tokenList, &i);
+    ASTnode *if_block = blockParse(tokenList, &i, "if");
     if(if_block == NULL){
         return NULL;
     }
 
     if(tokenList[i].type == TOK_ELSE){
         ++i;
-        else_block = blockParse(tokenList, &i);
+        else_block = blockParse(tokenList, &i, "else");
         if(else_block == NULL){
             printf("else block fails line %d.\n", tokenList[i].line);
             return NULL;
