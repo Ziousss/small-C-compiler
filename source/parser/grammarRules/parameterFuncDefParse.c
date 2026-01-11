@@ -1,6 +1,4 @@
-#include "../include/parser/ast.h"
 #include "../include/parser/grammarRules.h"
-#include "../include/parser/helperFunc.h"
 
 ParameterNode *parameterFuncDefParse(Tokenstruct *tokenList, int *index){
     int i = *index;

@@ -10,10 +10,11 @@ void programAnalyser(ASTnode *program){
     ASTnode *tmp = program->data.program_node.func_def;
     while (func_def_node->next != NULL)
     {
-        while (func_def_node)
-        {
-            funcDefAnalyser(func_def_node);
-        }
+        funcDefAnalyser(func_def_node);
         func_def_node = func_def_node->next;
     } 
+    //last time requiered since func_def_node.next == NULL means there is a last funcdef
+    funcDefAnalyser(func_def_node);
+    
+    return;
 }

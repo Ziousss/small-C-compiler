@@ -1,6 +1,4 @@
-#include "../include/parser/ast.h"
 #include "../include/parser/grammarRules.h"
-#include "../include/parser/helperFunc.h"
 
 ASTnode *programParse(Tokenstruct *tokenList, int *index){
     int i = *index;
@@ -55,7 +53,7 @@ ASTnode *programParse(Tokenstruct *tokenList, int *index){
         printf("No main function found in the file.\n");
         return NULL;
     }
-    
+
     *index = i;
     prinast(program);
     return program;

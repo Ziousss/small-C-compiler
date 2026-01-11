@@ -1,6 +1,4 @@
-#include "../include/parser/ast.h"
 #include "../include/parser/grammarRules.h"
-#include "../include/parser/helperFunc.h"
 
 //Did for fun before knowing the preprocessor ...
 //Not gonna implement it for real right now.

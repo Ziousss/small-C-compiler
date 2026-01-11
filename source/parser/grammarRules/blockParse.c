@@ -1,6 +1,4 @@
-#include "../include/parser/ast.h"
 #include "../include/parser/grammarRules.h"
-#include "../include/parser/helperFunc.h"
 
 ASTnode *blockParse(Tokenstruct *tokenList, int *index, char *name_function){
     int i = *index;
