@@ -14,8 +14,13 @@ ASTnode *forStmtParse(Tokenstruct *tokenList, int *index){
 
     ASTnode *initialisation = declarationParse(tokenList, &i);
     if(initialisation == NULL){
-        printf("initialisation issue in for loop.\n");
-        return NULL;
+        ASTnode *initialisation = assignParse(tokenList, &i);
+        {
+            if(initialisation == NULL){
+                printf("initialisation issue in for loop.\n");
+                return NULL;
+            }
+        }
     }
 
     if(tokenList[i].type != TOK_SEMICOLON){

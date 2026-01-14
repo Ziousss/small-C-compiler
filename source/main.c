@@ -5,12 +5,13 @@
 
 int main (int argc, char **argv) {
     if (argc > 3 || argc == 1) {
-        perror("You need 2 arguments");
+        perror("You need 2 arguments, the first being the compiler file and second being the file to compile.\n");
         return 0;
     }
 
     char *source = readFile(argv[1]);
     if (source == NULL){
+        printf("Fail to read the given file to compile.\n");
         return 1;
     }
 
