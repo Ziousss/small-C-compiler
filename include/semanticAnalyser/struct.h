@@ -1,25 +1,38 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
-typedef struct symbolNode symbolNode;
+typedef struct SymbolNode SymbolNode;
+typedef struct ScopeNode ScopeNode;
+typedef struct SemContext SemContext;
 
 typedef enum {
     SEM_INT, SEM_CHAR, SEM_STRING, SEM_VOID, SEM_ERROR
-} semanticType;
+} SemanticType;
 
 typedef enum {
     SEM_FCT, SEM_PARAM, SEM_VAR
-} semanticKind;
+} SemanticKind;
 
 typedef struct {
-    semanticType type;
-    semanticKind kind;
+    SemanticType type;
+    SemanticKind kind;
     char *name;
 
     int param_count;
-    semanticType *param;
+    SemanticType *param;
 
-    symbolNode *next;
-} symbolNode;
+    SymbolNode *next;
+} SymbolNode;
+
+typedef struct {
+    ScopeNode *parent;
+    SymbolNode *symbols;
+} ScopeNode;
+
+typedef struct {
+    ScopeNode *current_node;
+    SymbolNode *current_function;
+    int error_count;
+} SemContext;
 
 #endif
