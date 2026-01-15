@@ -2,6 +2,7 @@
 
 ASTnode *whileStmtParse(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
 
     if(tokenList[i].type != TOK_WHILE){
         return NULL;
@@ -37,6 +38,7 @@ ASTnode *whileStmtParse(Tokenstruct *tokenList, int *index){
     whileStmt->data.while_node.block = block;
     whileStmt->data.while_node.condition = condition;
     whileStmt->ast_type = AST_WHILE_STMT;
+    whileStmt->line = tokenList[start].line;
 
     *index = i;
     return whileStmt;

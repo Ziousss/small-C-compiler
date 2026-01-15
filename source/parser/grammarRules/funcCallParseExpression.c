@@ -2,6 +2,7 @@
 
 ASTnode *funcCallParseExpression(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
     ArgNode *args = NULL;
     ArgNode *last = NULL;
     char *name = strdup(tokenList[i].lexeme);
@@ -24,6 +25,7 @@ ASTnode *funcCallParseExpression(Tokenstruct *tokenList, int *index){
         funcCall->data.func_call.name = name;
         funcCall->ast_type = AST_FUNC_CALL;
         funcCall->data.func_call.args = args;
+        funcCall->line = tokenList[start].line;
     } else {
         int count = 0;
         while(true){
@@ -65,6 +67,7 @@ ASTnode *funcCallParseExpression(Tokenstruct *tokenList, int *index){
     funcCall->data.func_call.args = args;
     funcCall->ast_type = AST_FUNC_CALL;
     funcCall->data.func_call.name = name;
+    funcCall->line = tokenList[start].line;
 
     *index = i;
     return funcCall;

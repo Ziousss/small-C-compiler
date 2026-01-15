@@ -2,6 +2,7 @@
 
 ASTnode *assignParse(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
 
     //not every expression must be accepted later on
     ASTnode *target = expressionParse(tokenList, &i);
@@ -42,7 +43,7 @@ ASTnode *assignParse(Tokenstruct *tokenList, int *index){
     assigneNode->ast_type = AST_ASSIGN_EXPR;
     assigneNode->data.assign.target = target;
     assigneNode->data.assign.value = value;
-
+    assigneNode->line = tokenList[start].line;
     *index = i;
     return assigneNode;
 }

@@ -1,12 +1,13 @@
 #include "../include/semanticAnalyser/nodeAnalyser.h"
 
-void programAnalyser(ASTnode *program){
+bool programAnalyser(ASTnode *program){
     if(program == NULL || program->ast_type != AST_PROGRAM){
         printf("This is not a program ast, check the given ast.\n");
         return;
     }
 
-    static symbolNode stack_scope;
+    int analyser_error = 0;
+
     ASTnode *func_def_node = program->data.program_node.func_def;
     ASTnode *tmp = program->data.program_node.func_def;
     while (func_def_node != 0)
@@ -15,5 +16,8 @@ void programAnalyser(ASTnode *program){
         func_def_node = func_def_node->next;
     } 
 
-    return;
+    if(analyser_error == 0){
+        return true;
+    }
+    return false;
 }

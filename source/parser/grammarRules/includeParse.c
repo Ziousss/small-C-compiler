@@ -4,6 +4,7 @@
 //Not gonna implement it for real right now.
 ASTnode *includeParse(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
 
     int name_header;
     if(tokenList[i].type != TOK_HASHTAG){
@@ -65,6 +66,7 @@ ASTnode *includeParse(Tokenstruct *tokenList, int *index){
 
     include->ast_type = AST_INCLUDE;
     include->data.include_node.name = name;
+    include->line = tokenList[start].line;
 
     *index = i;
     return include;

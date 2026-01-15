@@ -2,6 +2,7 @@
 
 ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
     ASTnode *left = NULL;
 
     if(tokenList[i].type == TOK_IDENTIFIER){
@@ -25,6 +26,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
             ++i;
             left->ast_type = AST_IDENTIFIER;
             left->data.identifier.name = name;
+            left->line = tokenList[start].line;
         }
     }
     else if(tokenList[i].type == TOK_INTEGER_LITERAL){
@@ -35,6 +37,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         }
         left->ast_type = AST_NUMBER;
         left->data.int_literal.value = atoi(tokenList[i].lexeme);
+        left->line = tokenList[start].line;
         ++i;
     }
     else if(tokenList[i].type == TOK_LPAREN){
@@ -58,6 +61,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         char chr = tokenList[i].lexeme[0];
         left->ast_type = AST_CHAR_LITERAL;
         left->data.character_literal.character = chr;
+        left->line = tokenList[start].line;
         ++i;
     }
     else if(tokenList[i].type == TOK_STRING_LITERAL){
@@ -69,6 +73,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         char *string = strdup(tokenList[i].lexeme);
         left->ast_type = AST_STRING_LITERAL;
         left->data.string_literal.string = string;
+        left->line = tokenList[start].line;
         ++i;
         if(left == NULL){
             printf("NULL");
@@ -98,7 +103,7 @@ ASTnode *expressionParse(Tokenstruct *tokenList, int *index){
         tmp->data.binary.left = left;
         tmp->data.binary.right = right;
         tmp->data.binary.op = op;
-        
+        tmp->line = tokenList[start].line;
         left = tmp;
     }
 

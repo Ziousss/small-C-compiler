@@ -2,6 +2,7 @@
 
 ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
     ASTnode *declaration = NULL;
     Tokentype decla_type = tokenList[i].type;
     ASTnode *expression = NULL;
@@ -39,6 +40,7 @@ ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
     declaration->data.declaration.expression = expression;
     declaration->data.declaration.identifier = name;
     declaration->data.declaration.type = decla_type;
+    declaration->line = tokenList[start].line;
 
     *index = i;
     return declaration;

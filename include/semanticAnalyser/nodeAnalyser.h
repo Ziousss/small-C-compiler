@@ -9,7 +9,7 @@
 #include "struct.h"
 #include "helperFuncAnalyser.h"
 
-void programAnalyser(ASTnode *program);
+bool programAnalyser(ASTnode *program);
 void funcDefAnalyser(ASTnode *funcDefAst);
 void blockAnalyser(ASTnode *blockAst);
 void stmtAnalyser(ASTnode *stmtAst, int *count);

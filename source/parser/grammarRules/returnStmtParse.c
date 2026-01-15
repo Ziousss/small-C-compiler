@@ -2,6 +2,7 @@
 
 ASTnode *returnStmtParse(Tokenstruct *tokenList, int *index){
     int i = *index;
+    int start = *index;
     ASTnode *expression = NULL;
     if (tokenList[i].type != TOK_RETURN){
         return NULL;
@@ -27,6 +28,7 @@ ASTnode *returnStmtParse(Tokenstruct *tokenList, int *index){
     }
     returnStmt->data.return_node.expr = expression;
     returnStmt->ast_type = AST_RETURN;
+    returnStmt->line = tokenList[start].line;
 
     *index = i;
     return returnStmt;

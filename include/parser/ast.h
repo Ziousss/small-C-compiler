@@ -53,6 +53,7 @@ typedef struct ArgNode {
 
 typedef struct ASTnode {
     NodeType ast_type;
+    int line;
     union {
         struct { 
             char *name; 
