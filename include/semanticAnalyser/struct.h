@@ -6,14 +6,14 @@ typedef struct ScopeNode ScopeNode;
 typedef struct SemContext SemContext;
 
 typedef enum {
-    SEM_INT, SEM_CHAR, SEM_STRING, SEM_VOID, SEM_ERROR
+    SEM_INT, SEM_CHAR, SEM_STRING, SEM_VOID, SEM_BOOL, SEM_ERROR
 } SemanticType;
 
 typedef enum {
     SEM_FCT, SEM_PARAM, SEM_VAR
 } SemanticKind;
 
-typedef struct {
+typedef struct SymbolNode {
     SemanticType type;
     SemanticKind kind;
     char *name;
@@ -24,12 +24,12 @@ typedef struct {
     SymbolNode *next;
 } SymbolNode;
 
-typedef struct {
+typedef struct ScopeNode {
     ScopeNode *parent;
     SymbolNode *symbols;
 } ScopeNode;
 
-typedef struct {
+typedef struct SemContext {
     ScopeNode *current_node;
     SymbolNode *current_function;
     bool saw_return;

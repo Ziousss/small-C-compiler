@@ -30,20 +30,22 @@ SymbolNode *find_in_scope(char *name){
 
 SemanticType fromTokToSem(Tokentype type){
     switch (type){
-        case TOK_CHAR:          return SEM_CHAR;
-        case TOK_INT:           return SEM_INT;
-        case TOK_VOID:          return SEM_VOID;
+        case TOK_CHAR:              return SEM_CHAR;
+        case TOK_STRING_LITERAL:    return SEM_STRING;
+        case TOK_INT:               return SEM_INT;
+        case TOK_VOID:              return SEM_VOID;
         
-        default:                return SEM_ERROR;
+        default:                    return SEM_ERROR;
     }
 }
 
 char *fromSemToString(SemanticType type){
     switch (type){
-        case SEM_INT:   return "INT";
-        case SEM_CHAR:  return "CHAR";
-        case SEM_VOID:  return "VOID";
+        case SEM_INT:       return "Int";
+        case SEM_CHAR:      return "Char";
+        case SEM_STRING:    return "String";
+        case SEM_VOID:      return "Void";
 
-        default:        return "Not name yet";
+        default:            return "Not name yet";
     }
 }
