@@ -18,4 +18,7 @@ void returnAnalyser(ASTnode *returnAst, SemContext *context){
         context->error_count++;
         return;
     }
+
+    context->saw_return = true;
+    return;
 }

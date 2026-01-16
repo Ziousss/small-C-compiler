@@ -15,5 +15,7 @@ void blockAnalyser(ASTnode *blockAst, SemContext *context);
 void stmtAnalyser(ASTnode *stmtAst, int *count, SemContext *context);
 SemanticType expressionAnalyser(ASTnode *expressionAst, SemContext *context);
 void returnAnalyser(ASTnode *returnAst, SemContext *context);
+void assignAnalyser(ASTnode *assignment, SemContext *context);
+SemanticType funcCallAnalyser(ASTnode *funcCallAst, SemContext *context);
 
 #endif

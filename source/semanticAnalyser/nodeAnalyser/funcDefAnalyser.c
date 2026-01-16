@@ -17,10 +17,22 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
     funcDefSem->type = type;
     funcDefSem->next = NULL;
 
+    //This is useful for function calls
+    int param_count = funcDefAst->data.func_def.parameters->count;
+    funcDefSem->param_count = param_count;
+    funcDefSem->param = malloc(sizeof(SemanticType) * param_count);
+
+    ParameterNode *param = funcDefAst->data.func_def.parameters;
+    int i = 0;
+    while(param){
+        funcDefSem->param[i++] = param->ret_type;
+        param = param->next;
+    }
+    
     push_to_scope(funcDefSem);
+
     context->current_function = funcDefSem;
 
-    int count = 0;
     ParameterNode *paramAst = funcDefAst->data.func_def.parameters;
     while(paramAst){
         SymbolNode *paramSem = malloc(sizeof(SymbolNode));
@@ -36,6 +48,14 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
 
     blockAnalyser(funcDefAst->data.func_def.body, context);
     
+    if(context->current_function->type != SEM_VOID){
+        if(!(context->saw_return)){
+            printf("The function %s has a return type %s but no return has been found in it.\n", context->current_function->name, fromSemToString(context->current_function->type));
+            context->error_count++;
+            return;
+        }
+    }
+
     context->current_function = NULL;
-    pop_out_scope(count);
+    pop_out_scope(param_count);
 }

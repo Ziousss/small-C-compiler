@@ -11,7 +11,7 @@ bool programAnalyser(ASTnode *program) {
     context->current_node = NULL;
 
     ASTnode *func_def_node = program->data.program_node.func_def;
-    while (func_def_node != 0)
+    while (func_def_node != NULL)
     {
         funcDefAnalyser(func_def_node, context);
         func_def_node = func_def_node->next;

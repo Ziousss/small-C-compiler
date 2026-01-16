@@ -32,6 +32,7 @@ typedef struct {
 typedef struct {
     ScopeNode *current_node;
     SymbolNode *current_function;
+    bool saw_return;
     int error_count;
 } SemContext;
 
