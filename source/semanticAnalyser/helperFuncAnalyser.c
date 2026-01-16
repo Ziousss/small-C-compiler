@@ -49,3 +49,14 @@ char *fromSemToString(SemanticType type){
         default:            return "Not name yet";
     }
 }
+
+bool isCalculus(Tokentype op){
+    return (op == TOK_PLUS || op == TOK_MINUS || op == TOK_STAR 
+        || op == TOK_SLASH);
+}
+
+bool isBool(Tokentype op) {
+    return (op == TOK_EQEQ || op == TOK_PLUSEQ || op == TOK_GREQ
+        || op == TOK_MINUSEQ || op == TOK_UNEQ || op == TOK_LESS
+        || op == TOK_LESSEQ || op == TOK_GR);
+}

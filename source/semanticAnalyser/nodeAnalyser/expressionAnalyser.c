@@ -20,21 +20,19 @@ SemanticType expressionAnalyser(ASTnode *expressionAst, SemContext *context){
         case AST_BOOLEAN:           return SEM_BOOL;
 
         case AST_BINARY_EXPR: {
-            SemanticType left = expressionAnalyser(expressionAst->data.binary.left, context);
-            SemanticType right = expressionAnalyser(expressionAst->data.binary.left, context);
-
-            if(left != right){
-                printf("In the binary expression line %d, the type on the left %s is not the same as on the right with %s.\n", expressionAst->line, fromSemToString(left), fromSemToString(right));
-                context->error_count++;
-                return SEM_ERROR;
-            }
-
-            return left;
+            SemanticType binary_type = binaryExprAnalyser(expressionAst);
+            return binary_type;
         }
 
         case AST_FUNC_CALL: {
             SemanticType call_type = funcCallAnalyser(expressionAst, context);
             return call_type;
+        }
+
+        default:{
+            printf("Unsupported expression type %s at line %d\n", astTypeToString(expressionAst->ast_type), expressionAst->line);
+            context->error_count++;
+            return SEM_ERROR;
         }
     }
 }

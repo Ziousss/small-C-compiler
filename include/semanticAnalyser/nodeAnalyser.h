@@ -17,5 +17,7 @@ SemanticType expressionAnalyser(ASTnode *expressionAst, SemContext *context);
 void returnAnalyser(ASTnode *returnAst, SemContext *context);
 void assignAnalyser(ASTnode *assignment, SemContext *context);
 SemanticType funcCallAnalyser(ASTnode *funcCallAst, SemContext *context);
+void ifAnalyser(ASTnode *ifStmtAst, SemContext *context);
+SemanticType binaryExprAnalyser(ASTnode *binary, SemContext *context);
 
 #endif
