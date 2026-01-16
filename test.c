@@ -1,5 +1,5 @@
 void main(){
-    int i = 5;
-    int u = 6;
-    test = true;
+    for(int i = 0; i < 0; i+1){
+
+    }
 }

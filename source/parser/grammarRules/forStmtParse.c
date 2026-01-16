@@ -23,12 +23,7 @@ ASTnode *forStmtParse(Tokenstruct *tokenList, int *index){
             }
         }
     }
-
-    if(tokenList[i].type != TOK_SEMICOLON){
-        printf("';' expected in the \"for\" loop line %d\n", tokenList[i].line);
-        return NULL;
-    } ++i;
-
+    
     ASTnode *condition = expressionParse(tokenList, &i);
     if(condition == NULL){
         printf("condition issue in for loop.\n");
@@ -36,7 +31,7 @@ ASTnode *forStmtParse(Tokenstruct *tokenList, int *index){
     }
 
     if(tokenList[i].type != TOK_SEMICOLON){
-        printf("';' expected in the \"for\" loop line %d\n", tokenList[i].line);
+        printf("';' expected in the for loop line %d\n", tokenList[i].line);
         return NULL;
     } ++i;
 

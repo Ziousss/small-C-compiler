@@ -28,13 +28,13 @@ int main (int argc, char **argv) {
         return 1;
     }
 
-
+    /*
     bool compilable = programAnalyser(programNode);
     if(compilable != 0){
         printf("Semantics error.\n");
         return 1;
     }
-
+    */
     //now all good for compilation
     return 0;
 }

@@ -1,29 +1,30 @@
 #include "../include/semanticAnalyser/helperFuncAnalyser.h"
 
-static SymbolNode *stack_scope = NULL;
-
-void push_to_scope(SymbolNode *sym){
-    sym->next = stack_scope;
-    stack_scope = sym;
+void push_scope(SemContext *context){
+    ScopeNode *new_scope = malloc(sizeof(ScopeNode));
+    new_scope->symbols = NULL;
+    new_scope->parent = context->current_scope;
+    context->current_scope = new_scope;
 }
 
-void pop_out_scope(int count){
-    while(stack_scope != NULL && count-- > 0){
-        SymbolNode *tmp = stack_scope;
-        stack_scope = stack_scope->next;
-        free(tmp->name);
-        free(tmp);
-    }
+void pop_scope(SemContext *context){
+    ScopeNode *old = context->current_scope;
+    context->current_scope = old->parent;
+    free(old);
 }
 
-SymbolNode *find_in_scope(char *name){
-    SymbolNode *cur = stack_scope;
-    while(cur){
-        if(strcmp(cur->name, name) == 0){
-            return cur;
+void push_variables(SymbolNode *sym, SemContext *context){;
+    sym->next = context->current_scope->symbols;
+    context->current_scope->symbols = sym;
+}
+
+SymbolNode *find_in_scope(char *name, SemContext *context){
+    for(ScopeNode *scope = context->current_scope; scope != NULL; scope = scope->parent){
+        for(SymbolNode *sym = scope->symbols; sym != NULL; sym = sym->next){
+            if(strcmp(sym->name, name) == 0){
+                return sym;
+            }
         }
-
-        cur = cur->next;
     }
     return NULL;
 }
