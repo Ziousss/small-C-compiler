@@ -3,24 +3,32 @@
 void stmtAnalyser(ASTnode *stmtAst, int *count, SemContext *context){
     NodeType ast_type = stmtAst->ast_type;
     switch (ast_type){
+        //Forbids shadowing in different scope, will change it later.
         case AST_VAR_DECL: {
             if(find_in_scope(stmtAst->data.declaration.identifier)){
                 printf("Redefinition of the %s identifier.\n", stmtAst->data.declaration.identifier);
+                context->error_count++;
                 return;
+            }
+
+            SemanticType left_type = fromTokToSem(stmtAst->data.declaration.type);
+            if(stmtAst->data.declaration.expression != NULL){
+                SemanticType right_type = expressionAnalyser(stmtAst->data.declaration.expression, context);
+                if(right_type != left_type){
+                    printf("On declaration line %d, the right side has %s type but the left is defined as %s type.\n", stmtAst->line, fromSemToString(right_type), fromSemToString(left_type));
+                    context->error_count++;
+                    return;
+                }
             }
 
             SymbolNode *sym = malloc(sizeof(SymbolNode));
             sym->kind = SEM_VAR;
             sym->name = strdup(stmtAst->data.declaration.identifier);
-            sym->type = fromTokToSem(stmtAst->data.declaration.type);
+            sym->type = left_type;
             sym->next = NULL;
 
             push_to_scope(sym);
             (*count)++;
-
-            if(stmtAst->data.declaration.expression != NULL){
-                expressionAnalyser(stmtAst->data.declaration.expression, context);
-            }
             break;
         }
         case AST_RETURN: {
@@ -32,12 +40,7 @@ void stmtAnalyser(ASTnode *stmtAst, int *count, SemContext *context){
             break;
         }
         case AST_IF_STMT: {
-            SemanticType condition_type = expressionAnalyser(stmtAst->data.if_node.condition, context);
-            
-            blockAnalyser(stmtAst->data.if_node.if_branch, context);
-            if(stmtAst->data.if_node.else_branch, context){
-                blockAnalyser(stmtAst->data.if_node.else_branch, context);
-            }
+            ifAnalyser(stmtAst, context);
             break;
         }
     }
