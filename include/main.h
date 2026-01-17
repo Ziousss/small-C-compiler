@@ -1,0 +1,9 @@
+#ifndef MAIN_H
+#define MAIN_H
+
+#include "../include/lexer/tokenizer.h"
+#include "../include/lexer/readFile.h"
+#include "../include/parser/grammarRules.h"
+#include "../include/semanticAnalyser/nodeAnalyser.h"
+
+#endif

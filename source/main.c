@@ -1,7 +1,4 @@
-#include "../include/lexer/tokenizer.h"
-#include "../include/lexer/readFile.h"
-#include "../include/parser/grammarRules.h"
-#include "../include/semanticAnalyser/nodeAnalyser.h"
+#include "../include/main.h"
 
 int main (int argc, char **argv) {
     if (argc > 3 || argc == 1) {
@@ -33,7 +30,7 @@ int main (int argc, char **argv) {
         printf("Semantics error.\n");
         return 1;
     }
-    printf("Semantic is good\n");
+    printf("Semantic is good.\n");
 
     //now all good for compilation
     return 0;

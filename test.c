@@ -1,11 +1,11 @@
-char main(int i, int j, char h){
-    i = 4;
-    return 'g';
-}
+void main(int i){
+    i = 4 + 5;
+    for (int j = 0; j < i; j+1){
+        j = i+2;
+        while(1){
+            return j;
+        }
+    }
 
-void foo(){
-    int i = 5;
-    int j =7;
-    char f = main(i,j, 'g');
-    i = 5;
+
 }

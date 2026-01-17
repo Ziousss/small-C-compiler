@@ -51,6 +51,7 @@ const char* tokenTypeToString(int type) {
         case TOK_INT:               return "INT_TYPE";
         case TOK_CHAR:              return "CHAR_TYPE";
         case TOK_VOID:              return "VOID_TYPE";
+        case TOK_STRING:            return "STRING_TYPE";
         
         case TOK_TRUE:              return "TRUE";
         case TOK_FALSE:             return "FALSE";

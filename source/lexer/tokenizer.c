@@ -264,6 +264,21 @@ Tokenstruct *lexicalAnalyzer(char *input){
                     char *sub = getSubstring(input, start, right - 1);
                     int sublen = strlen(sub);
                     Tokentype type = keyword_type(sub);
+                    
+                    if(type == TOK_CHAR){
+                        if(right+1 < len && (input[right] == '*' || input[right+1] == '*')){
+                            if(input[right] == ' '){
+                                right++;
+                            }
+                            sub = getSubstring(input, start, right);
+                            sublen = strlen(sub);
+                            maketokenString(tokenList, tokencount, TOK_STRING, sub, sublen, line);
+                            tokencount++;
+                            right++;
+                            left = right;
+                            continue;
+                        }
+                    } 
                     maketokenString(tokenList, tokencount, type, sub, sublen, line);
                 }
 
