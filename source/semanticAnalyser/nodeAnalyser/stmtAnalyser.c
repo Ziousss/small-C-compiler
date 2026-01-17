@@ -5,8 +5,8 @@ void stmtAnalyser(ASTnode *stmtAst, SemContext *context){
     switch (ast_type){
         //Forbids shadowing in different scope, will change it later.
         case AST_VAR_DECL: {
-            if(find_in_scope(stmtAst->data.declaration.identifier, context)){
-                printf("Redefinition of the %s identifier.\n", stmtAst->data.declaration.identifier);
+            if(find_in_current_scope(stmtAst->data.declaration.identifier, context)){
+                printf("Redefinition of the %s identifier in the same scope.\n", stmtAst->data.declaration.identifier);
                 context->error_count++;
                 return;
             }

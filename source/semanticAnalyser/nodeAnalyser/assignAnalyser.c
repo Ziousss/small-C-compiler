@@ -7,6 +7,11 @@ void assignAnalyser(ASTnode *assignment, SemContext *context){
         context->error_count += 1;
         return;
     }
+    if(target->kind != SEM_VAR && target->kind != SEM_PARAM){
+        printf("Left side of assignment at line %d is not assignable.\n", assignment->line);
+        context->error_count++;
+        return;
+    }
 
     SemanticType target_type = target->type;
     SemanticType value_type = expressionAnalyser(assignment->data.assign.value,context);

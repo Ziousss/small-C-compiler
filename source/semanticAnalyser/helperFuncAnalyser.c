@@ -29,6 +29,16 @@ SymbolNode *find_in_scope(char *name, SemContext *context){
     return NULL;
 }
 
+//for variables shadowing
+SymbolNode *find_in_current_scope(char *name, SemContext *context){
+    for(SymbolNode *sym = context->current_scope->symbols; sym != NULL; sym = sym->next){
+        if(strcmp(sym->name, name) == 0){
+            return sym;
+        }
+    }
+    return NULL;
+}
+
 SemanticType fromTokToSem(Tokentype type){
     switch (type){
         case TOK_CHAR:              return SEM_CHAR;

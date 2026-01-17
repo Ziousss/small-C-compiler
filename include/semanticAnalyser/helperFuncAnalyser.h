@@ -13,6 +13,7 @@ void push_scope(SemContext *context);
 void pop_scope(SemContext *context);
 void push_variables(SymbolNode *sym, SemContext *context);
 SymbolNode *find_in_scope(char *name, SemContext *context);
+SymbolNode *find_in_current_scope(char *name, SemContext *context);
 SemanticType fromTokToSem(Tokentype type);
 char *fromSemToString(SemanticType type);
 bool isBool(Tokentype op);

@@ -29,10 +29,11 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
         param = param->next;
     }
     
-    push_scope(context);
     push_variables(funcDefSem, context);
+    push_scope(context);
 
     context->current_function = funcDefSem;
+    context->saw_return = false;
 
     ParameterNode *paramAst = funcDefAst->data.func_def.parameters;
     while(paramAst){
