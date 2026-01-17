@@ -7,6 +7,10 @@ bool programAnalyser(ASTnode *program) {
     }
 
     SemContext *context = malloc(sizeof(SemContext));
+    if(context == NULL){
+        printf("Malloc error for context in programAnalyser.\n");
+        return false;
+    }
     context->current_function = NULL;
     context->error_count = 0;
     context->current_scope = NULL;

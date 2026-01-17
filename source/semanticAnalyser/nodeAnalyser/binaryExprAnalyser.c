@@ -10,9 +10,9 @@ SemanticType binaryExprAnalyser(ASTnode *binary, SemContext *context){
     if(left == SEM_CHAR || left == SEM_STRING || right == SEM_CHAR || right == SEM_STRING ){
         printf("Binary operation on line %d cannot have type CHAR or CHAR *.\n", binary->line);
         context->error_count++;
-        return;
+        return SEM_ERROR;
     }
-    
+
     Tokentype op = binary->data.binary.op;
     if(isCalculus(op)){
         if(left == SEM_INT && right == SEM_INT){

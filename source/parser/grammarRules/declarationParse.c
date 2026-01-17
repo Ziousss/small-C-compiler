@@ -36,6 +36,7 @@ ASTnode *declarationParse(Tokenstruct *tokenList, int *index){
         free(name);
         return NULL;
     }
+    
     declaration->ast_type = AST_VAR_DECL;
     declaration->data.declaration.expression = expression;
     declaration->data.declaration.identifier = name;

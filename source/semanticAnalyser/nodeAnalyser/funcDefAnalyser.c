@@ -5,6 +5,7 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
         return;
     }
 
+
     SymbolNode *funcDefSem = malloc(sizeof(SymbolNode));
     SemanticType type = fromTokToSem(funcDefAst->data.func_def.return_type);
     if(type == SEM_ERROR){
@@ -21,22 +22,35 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
     int param_count = funcDefAst->data.func_def.parameters->count;
     funcDefSem->param_count = param_count;
     funcDefSem->param = malloc(sizeof(SemanticType) * param_count);
+    if(funcDefSem->param == NULL){
+        printf("Malloc issue in funcDefAnalyser.\n");
+        context->error_count++;
+        return;
+    }
 
     ParameterNode *param = funcDefAst->data.func_def.parameters;
-    int i = 0;
-    while(param){
+
+    for(int i = 0; i < param_count; i++){
         funcDefSem->param[i++] = param->ret_type;
         param = param->next;
     }
+
     
+    //creates global scope
+    push_scope(context);
     push_variables(funcDefSem, context);
+
+    //creates function scope
     push_scope(context);
 
     context->current_function = funcDefSem;
     context->saw_return = false;
 
+
     ParameterNode *paramAst = funcDefAst->data.func_def.parameters;
-    while(paramAst){
+
+    for(int i = 0; i < param_count; i++){
+
         SymbolNode *paramSem = malloc(sizeof(SymbolNode));
 
         paramSem->kind = SEM_PARAM;

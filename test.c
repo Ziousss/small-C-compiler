@@ -1,5 +1,9 @@
 void main(){
-    for(int i = 0; i < 0; i+1){
-
+    int i;
+    while(i < 0){
+        int c = 0;
+        i = 5;
     }
+
+    c = 1 + 5;
 }

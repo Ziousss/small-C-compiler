@@ -4,14 +4,30 @@ ASTnode *blockParse(Tokenstruct *tokenList, int *index, char *name_function){
     int i = *index;
     
     if(tokenList[i].type != TOK_LBRACE){
-        printf("Expected '{' line %d\n", tokenList[i].line);
+        if(tokenList[i].line == tokenList[i-1].line){
+            printf("Expected '{' line %d\n", tokenList[i].line);
+            return NULL;
+        }
+        printf("Expected '{' line %d\n", tokenList[i-1].line);
+        return NULL;
     } ++i;
 
     ASTnode *stmt_list = NULL;
     ASTnode *last = NULL;
     if(tokenList[i].type == TOK_RBRACE){
-        printf("Function %s is empty\n", name_function);
-        return NULL;
+        i++;
+
+        ASTnode *block = malloc(sizeof(ASTnode));
+        if(block==NULL){
+            printf("Error malloc in block parser empty function.\n");
+            return NULL;
+        }
+        block->ast_type = AST_BLOCK;
+        block->data.block.stmts = NULL;
+        block->next = NULL;
+
+        *index = i;
+        return block;
     } else {
         while (tokenList[i].type != TOK_RBRACE)
         {
@@ -79,6 +95,16 @@ ASTnode *blockParse(Tokenstruct *tokenList, int *index, char *name_function){
     }
 
     ++i;
+    
+    ASTnode *block = malloc(sizeof(ASTnode));
+    if(block==NULL){
+        printf("Error malloc in block parser.\n");
+        return NULL;
+    }
+    block->ast_type = AST_BLOCK;
+    block->data.block.stmts = stmt_list;
+    block->next = NULL;
+
     *index = i;
-    return stmt_list;
+    return block;
 }

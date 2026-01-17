@@ -29,7 +29,7 @@ SymbolNode *find_in_scope(char *name, SemContext *context){
     return NULL;
 }
 
-//for variables shadowing
+//for variablesshadowing
 SymbolNode *find_in_current_scope(char *name, SemContext *context){
     for(SymbolNode *sym = context->current_scope->symbols; sym != NULL; sym = sym->next){
         if(strcmp(sym->name, name) == 0){
@@ -54,10 +54,11 @@ char *fromSemToString(SemanticType type){
     switch (type){
         case SEM_INT:       return "Int";
         case SEM_CHAR:      return "Char";
+        case SEM_BOOL:      return "Bool";
         case SEM_STRING:    return "String";
         case SEM_VOID:      return "Void";
 
-        default:            return "Not name yet";
+        default:            return "Not named yet";
     }
 }
 

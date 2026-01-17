@@ -21,7 +21,7 @@ void assignAnalyser(ASTnode *assignment, SemContext *context){
     }
 
     if(target_type != value_type){
-        printf("Type missmatch on assignement line %d. The left is type %s and right is type %s", assignment->line, fromSemToString(target_type), fromSemToString(value_type));
+        printf("Type missmatch on assignement line %d. The left is type %s and right is type %s.\n", assignment->line, fromSemToString(target_type), fromSemToString(value_type));
         context->error_count += 1;
         return;
     }
