@@ -24,6 +24,7 @@ int main (int argc, char **argv) {
         printf("programNode is NULL\n");
         return 1;
     }
+    free(tokenList);
 
     bool compilable = programAnalyser(programNode);
     if(!compilable){

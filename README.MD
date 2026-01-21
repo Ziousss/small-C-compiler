@@ -52,7 +52,7 @@ Clone the repository and build the project using CMake:
 
 ```bash
 git clone https://github.com/ziousss/tella-compiler
-cd compiler
+cd tella-compiler
 mkdir build && cd build
 cmake ..
 make

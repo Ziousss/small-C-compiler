@@ -68,8 +68,7 @@ typedef struct ASTnode {
             bool boolean;
         } boolean_literal;
 
-        struct 
-        {
+        struct {
             char *string;
         } string_literal;
         
