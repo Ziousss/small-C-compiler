@@ -40,7 +40,7 @@ These components are mostly functional but may still require fixes and improveme
 The next major step is to implement the **code generation phase**.
 
 This will require additional research, particularly regarding:
-- Target architecture
+- Intermediate representation
 - Instruction selection
 - Code emission
 
