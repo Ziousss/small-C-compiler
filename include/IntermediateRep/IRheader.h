@@ -5,9 +5,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include "structIR.h"
-#include "../include/parser/ast.h"
+#include "helperFunc.h"
 
-void programIR(ASTnode *program);
-void funcDefIR(ASTnode *funcdef);
+IRstruct *programIR(ASTnode *program);
+void funcDefIR(ASTnode *funcdef, IRContext *context);
 
 #endif

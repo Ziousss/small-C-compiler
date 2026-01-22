@@ -1,6 +1,8 @@
 #ifndef STRUCTIR_H
 #define STRUCTIR_H
 
+#include <stdbool.h>
+
 typedef struct Operand Operand;
 typedef struct IRstruct IRstruct;
 
@@ -41,22 +43,46 @@ typedef struct {
                 struct {
                     bool boolean;
                 }boolean;
+
             }value;
+
         } IR_constant;
 
         struct {
-            int id;
+            int id_tmp;
         } IR_tmp;
         
     }data; 
 } Operand;
 
 
-typedef struct  {
+typedef struct IRstruct {
     IRoperation op;
-    Operand dst, src1, src2;
-    IRstruct *next;
+    union {
+        struct {
+            Operand dst, src1, src2;
+        } binary;
+        struct {
+            int label_id;
+        } label;
+        struct {
+            int target_label;
+        } jump;
+        struct {
+            Operand return_value;
+        } ret;
+    } data;
+    struct IRstruct *next;
 } IRstruct;
+
+//Instead of passing everyone of those in each function and having 5 arguments, I only pass one struct.
+typedef struct {
+    IRstruct *head;
+    IRstruct *tail;
+    int current_tmp;
+    int current_label;
+    int errors;
+} IRContext;
 
 
 #endif

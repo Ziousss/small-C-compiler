@@ -5,7 +5,6 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
         return;
     }
 
-
     SymbolNode *funcDefSem = malloc(sizeof(SymbolNode));
     SemanticType type = fromTokToSem(funcDefAst->data.func_def.return_type);
     if(type == SEM_ERROR){
