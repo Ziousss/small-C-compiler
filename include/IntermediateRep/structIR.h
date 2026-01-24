@@ -8,8 +8,8 @@ typedef struct IRstruct IRstruct;
 
 typedef enum {
     IR_LABEL,
-    IR_ADD, IR_SUB, IR_MULT, IR_DIV,
-    IR_CALL, IR_JMP, IR_RET, IR_ASSIGN, 
+    IR_ADD, IR_SUB, IR_MULT, IR_DIV, IR_GR, IR_GREQ, IR_LESS, IR_LESSEQ, IR_EQEQ, IR_UNEQ, 
+    IR_CALL, IR_JMP, IR_JMP_FALSE, IR_RET, IR_ASSIGN, 
     IR_ERROR,
 } IRoperation;
 
@@ -65,12 +65,20 @@ typedef struct IRstruct {
         struct {
             Operand dst, src1, src2;
         } binary;
+
         struct {
             int label_id;
         } label;
+        
         struct {
             int target_label;
         } jump;
+        
+        struct {
+            int target_label;
+            Operand condition;
+        } condition_jump;
+        
         struct {
             Operand return_value;
         } ret;

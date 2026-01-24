@@ -13,5 +13,7 @@ IRstruct *programIR(ASTnode *program);
 void funcDefIR(ASTnode *funcdef, IRContext *context);
 void blockIR(ASTnode *block, IRContext *context);
 Operand expressionIR(ASTnode *expression, IRContext *context);
+void forIR(ASTnode *forStmt, IRContext *context);
+void whileIR(ASTnode *whileStmt, IRContext *context);
 
 #endif

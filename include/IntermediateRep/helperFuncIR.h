@@ -8,7 +8,7 @@
 #include "../include/lexer/tokenizer.h"
 
 void emit(IRstruct *to_add, IRContext *context);
-IRstruct *newLabel(IRContext *context);
+IRstruct *newLabel(IRContext *context, int label);
 IRstruct *newBinary(IRContext *context, Operand dst, Operand src1, Operand src2, IRoperation op);
 IRstruct *newJmp(IRContext *context, int target);
 IRstruct *newReturn(IRContext *context, Operand target);
@@ -19,5 +19,6 @@ Operand newBool(bool value);
 Operand newInt(int value);
 Operand newTmp(IRContext *context);
 IRoperation fromTokToIRtype(Tokentype type);
+IRstruct *newJmpFalse(IRContext *context, int end_label, Operand condition);
 
 #endif

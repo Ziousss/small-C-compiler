@@ -13,17 +13,17 @@ void emit(IRstruct *to_add, IRContext *context){
     context->tail = to_add;
 }
 
-IRstruct *newLabel(IRContext *context){
+IRstruct *newLabel(IRContext *context, int label){
     IRstruct *new = malloc(sizeof(IRstruct));
     if(new == NULL){
-        printf("Malloc error in newLabel with number %d.\n", context->current_label+1);
+        printf("Malloc error in newLabel.\n");
         context->errors++;
         return NULL;
     }
 
     new->next = NULL;
     new->op = IR_LABEL;
-    new->data.label.label_id = context->current_label++;
+    new->data.label.label_id = label;
 
     return new;
 }
@@ -56,6 +56,22 @@ IRstruct *newJmp(IRContext *context, int target){
     new->next = NULL;
     new->op = IR_JMP;
     new->data.jump.target_label = target;
+
+    return new;
+}
+
+IRstruct *newJmpFalse(IRContext *context, int end_label, Operand condition){
+    IRstruct *new = malloc(sizeof(IRstruct));
+    if(new == NULL){
+        printf("Malloc error in newJmp to taget %d.\n", end_label);
+        context->errors++;
+        return NULL;
+    }
+
+    new->next = NULL;
+    new->op = IR_JMP_FALSE;
+    new->data.condition_jump.target_label = end_label;
+    new->data.condition_jump.condition = condition;
 
     return new;
 }
@@ -146,6 +162,12 @@ IRoperation fromTokToIRtype(Tokentype type){
         case TOK_PLUS:          return IR_ADD;
         case TOK_STAR:          return IR_MULT;
         case TOK_SLASH:         return IR_DIV;
+        case TOK_GR:            return IR_GR;
+        case TOK_GREQ:          return IR_GREQ;
+        case TOK_LESS:          return IR_LESS;
+        case TOK_LESSEQ:        return IR_LESSEQ;
+        case TOK_EQEQ:          return IR_EQEQ;
+        case TOK_UNEQ:          return IR_UNEQ;
 
         default:                return IR_ERROR;
     }
