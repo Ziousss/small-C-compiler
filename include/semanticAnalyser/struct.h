@@ -4,6 +4,7 @@
 typedef struct SymbolNode SymbolNode;
 typedef struct ScopeNode ScopeNode;
 typedef struct SemContext SemContext;
+typedef struct GlobalFunc GlobalFunc;
 
 typedef enum {
     SEM_INT, SEM_CHAR, SEM_STRING, SEM_VOID, SEM_BOOL, SEM_ERROR
@@ -35,5 +36,14 @@ typedef struct SemContext {
     bool saw_return;
     int error_count;
 } SemContext;
+
+typedef struct GlobalFunc {
+    SemanticType type;
+    char *name;
+    int param_count;
+    SemanticType *param;
+
+    GlobalFunc *next;
+} GlobalFunc;
 
 #endif

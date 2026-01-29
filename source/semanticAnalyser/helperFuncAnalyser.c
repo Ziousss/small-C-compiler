@@ -39,6 +39,43 @@ SymbolNode *find_in_current_scope(char *name, SemContext *context){
     return NULL;
 }
 
+GlobalFunc *getAllFunctions(const SemContext *context) {
+    if (!context || !context->current_scope) {
+        return NULL;
+    }
+
+    SymbolNode *sym = context->current_scope->symbols;
+    GlobalFunc *head = NULL;
+    GlobalFunc *tail = NULL;
+
+    while (sym) {
+        if (sym->kind == SEM_FCT) {
+            GlobalFunc *node = malloc(sizeof(GlobalFunc));
+            if (!node) {
+                printf("Malloc error in getAllFunctions\n");
+                return NULL;
+            }
+
+            node->name = sym->name;          
+            node->type = sym->type;
+            node->param_count = sym->param_count;
+            node->param = sym->param;        
+            node->next = NULL;
+
+            if (!head) {
+                head = tail = node;
+            } else {
+                tail->next = node;
+                tail = node;
+            }
+        }
+        sym = sym->next;
+    }
+
+    return head;
+}
+
+
 SemanticType fromTokToSem(Tokentype type){
     switch (type){
         case TOK_CHAR:              return SEM_CHAR;

@@ -1,7 +1,7 @@
 #include "../include/main.h"
 
 int main (int argc, char **argv) {
-    if (argc > 3 || argc == 1) {
+    if (argc != 2) {
         perror("You need 2 arguments, the first being the compiler file and second being the file to compile.\n");
         return 0;
     }
@@ -26,8 +26,8 @@ int main (int argc, char **argv) {
     }
     free(tokenList);
 
-    bool compilable = programAnalyser(programNode);
-    if(!compilable){
+    GlobalFunc *functions = programAnalyser(programNode);
+    if(functions == NULL){
         printf("Semantics error.\n");
         return 1;
     }

@@ -1,21 +1,22 @@
 #include "../include/semanticAnalyser/nodeAnalyser.h"
 
-bool programAnalyser(ASTnode *program) {
+GlobalFunc *programAnalyser(ASTnode *program) {
     if(program == NULL || program->ast_type != AST_PROGRAM){
         printf("This is not a program ast, check the given ast.\n");
-        return false;
+        return NULL;
     }
 
     SemContext *context = malloc(sizeof(SemContext));
     if(context == NULL){
         printf("Malloc error for context in programAnalyser.\n");
-        return false;
+        return NULL;
     }
     context->current_function = NULL;
     context->error_count = 0;
     context->current_scope = NULL;
     context->saw_return = false;
 
+    push_scope(context);
     ASTnode *func_def_node = program->data.program_node.func_def;
     while (func_def_node != NULL)
     {
@@ -23,9 +24,10 @@ bool programAnalyser(ASTnode *program) {
         func_def_node = func_def_node->next;
     } 
 
-    if(context->error_count == 0){
-        return true;
+    GlobalFunc *functionsList = getAllFunctions(context);
+    if(context->error_count != 0){
+        return NULL;
     }
-    return false;
 
+    return functionsList;
 }

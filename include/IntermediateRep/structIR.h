@@ -18,7 +18,7 @@ typedef enum {
 } IRtype;
 
 typedef enum {
-    IR_INT, IR_STRING, IR_CHAR, IR_BOOL
+    IR_INT, IR_STRING, IR_CHAR, IR_BOOL, IR_VOID,
 } CstTypes;
 
 typedef struct {
@@ -93,6 +93,7 @@ typedef struct {
     int current_tmp;
     int current_label;
     int errors;
+    bool returned;
 } IRContext;
 
 #endif

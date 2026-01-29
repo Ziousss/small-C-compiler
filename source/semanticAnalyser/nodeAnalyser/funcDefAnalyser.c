@@ -5,6 +5,13 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
         return;
     }
 
+    SymbolNode *func = find_in_current_scope(funcDefAst->data.func_def.name, context);
+    if(func != NULL){
+        printf("Function redefinition. The function called %s is already defined wih that name.\n", funcDefAst->data.func_def.name);
+        context->error_count++;
+        return;
+    }
+
     SymbolNode *funcDefSem = malloc(sizeof(SymbolNode));
     SemanticType type = fromTokToSem(funcDefAst->data.func_def.return_type);
     if(type == SEM_ERROR){
@@ -34,9 +41,7 @@ void funcDefAnalyser(ASTnode *funcDefAst, SemContext *context){
         param = param->next;
     }
 
-    
-    //creates global scope
-    push_scope(context);
+    //pushed to global scope
     push_variables(funcDefSem, context);
 
     //creates function scope
