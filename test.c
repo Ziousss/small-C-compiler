@@ -7,3 +7,12 @@ void main(int i){
         }
     }
 }
+
+int foo(){
+    int i = 2;
+    return i;
+}
+
+void test(){
+    char test = 'c';
+}

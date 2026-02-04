@@ -4,6 +4,10 @@ void blockIR(ASTnode *block, IRContext *context){
     ASTnode *stmt = block->data.block.stmts;
     while(stmt != NULL){
         NodeType type = stmt->ast_type;
+        if (context->returned) {
+            return;
+        }
+        
         switch (type){
             case AST_VAR_DECL: {
                 if(stmt->data.declaration.expression == NULL){
@@ -35,7 +39,8 @@ void blockIR(ASTnode *block, IRContext *context){
             }
             case AST_RETURN:{
                 returnIR(stmt, context);
-                break;
+                context->returned = true;
+                return;
             }
             case AST_WHILE_STMT: {
                 whileIR(stmt, context);
@@ -47,6 +52,10 @@ void blockIR(ASTnode *block, IRContext *context){
             }
             case AST_IF_STMT: {
                 ifIR(stmt, context);
+                break;
+            }
+            case AST_FUNC_CALL: {
+                funcCallIR(stmt, context);
                 break;
             }
             default: {

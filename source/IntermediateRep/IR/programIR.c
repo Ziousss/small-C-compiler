@@ -1,6 +1,6 @@
 #include "../include/IntermediateRep/IRheader.h"
 
-IRstruct *programIR(ASTnode *program){
+IRstruct *programIR(ASTnode *program, GlobalFunc *definedFunc){
     if(program->ast_type != AST_PROGRAM){
         printf("Given AST is not the program AST.\n");
         return;
@@ -17,6 +17,7 @@ IRstruct *programIR(ASTnode *program){
     context->current_label = 0;
     context->current_tmp = 0;
 
+    initGlobalFunctions(definedFunc);
     ASTnode *funcdef = program->data.program_node.func_def;
     while(funcdef != NULL){
         funcDefIR(funcdef, context);

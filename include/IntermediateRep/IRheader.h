@@ -10,7 +10,7 @@
 #include "helperFunc.h"
 #include "../include/semanticAnalyser/struct.h"
 
-IRstruct *programIR(ASTnode *program);
+IRstruct *programIR(ASTnode *program, GlobalFunc *definedFunc);
 void funcDefIR(ASTnode *funcdef, IRContext *context);
 void blockIR(ASTnode *block, IRContext *context);
 Operand expressionIR(ASTnode *expression, IRContext *context);

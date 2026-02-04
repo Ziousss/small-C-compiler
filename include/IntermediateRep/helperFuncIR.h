@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "structIR.h"
 #include "../include/lexer/tokenizer.h"
+#include "../include/semanticAnalyser/struct.h"
 
 void emit(IRstruct *to_add, IRContext *context);
 IRstruct *newLabel(IRContext *context, int label);
@@ -17,8 +18,13 @@ Operand newString(char *value);
 Operand newChar(char value);
 Operand newBool(bool value);
 Operand newInt(int value);
-Operand newTmp(IRContext *context);
+Operand newTmp(CstTypes type, IRContext *context);
 IRoperation fromTokToIRtype(Tokentype type);
 IRstruct *newJmpFalse(IRContext *context, int end_label, Operand condition);
+void initGlobalFunctions(const GlobalFunc *funcs);
+const GlobalFunc *findFuncDef(char *name);
+CstTypes fromSemToIRTypes(SemanticType type);
+IRstruct *newArg(IRContext *context, Operand arg);
+IRstruct *newCall(IRContext *context, char *name, int count, Operand dst);
 
 #endif

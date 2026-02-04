@@ -1,5 +1,22 @@
 #include "../include/IntermediateRep/helperFuncIR.h"
 
+static const GlobalFunc *definedFunc = NULL;
+
+void initGlobalFunctions(GlobalFunc *funcs) {
+    definedFunc = funcs;
+}
+
+const GlobalFunc *findFuncDef(char *name){
+    GlobalFunc *tmp = definedFunc;
+    while (tmp != NULL) {
+        if(strcmp(name, tmp->name) == 0){
+            return tmp;
+        }
+        tmp = tmp->next;
+    }
+    return NULL;
+}
+
 void emit(IRstruct *to_add, IRContext *context){
     to_add->next = NULL;
 
@@ -11,6 +28,38 @@ void emit(IRstruct *to_add, IRContext *context){
 
     context->tail->next = to_add;
     context->tail = to_add;
+}
+
+IRstruct *newArg(IRContext *context, Operand arg){
+    IRstruct *new = malloc(sizeof(IRstruct));
+    if(new == NULL){
+        printf("Malloc error in newLabel.\n");
+        context->errors++;
+        return NULL;
+    }
+
+    new->next = NULL;
+    new->data.arg.value = arg;
+    new->op = IR_ARG;
+
+    return new;
+}
+
+IRstruct *newCall(IRContext *context, char *name, int count, Operand dst){
+    IRstruct *new = malloc(sizeof(IRstruct));
+    if(new == NULL){
+        printf("Malloc error in newLabel.\n");
+        context->errors++;
+        return NULL;
+    }
+
+    new->next = NULL;
+    new->op = IR_CALL;
+    new->data.call.arg_count = count;
+    new->data.call.dst = dst;
+    new->data.call.func_name = name;
+
+    return new;
 }
 
 IRstruct *newLabel(IRContext *context, int label){
@@ -76,7 +125,7 @@ IRstruct *newJmpFalse(IRContext *context, int end_label, Operand condition){
     return new;
 }
 
-IRstruct *newReturn(IRContext *context, Operand target){
+IRstruct *newReturn(IRContext *context, Operand target, CstTypes type){
     IRstruct *new = malloc(sizeof(IRstruct));
     if(new == NULL){
         printf("Malloc error in newReturn.\n");
@@ -87,6 +136,7 @@ IRstruct *newReturn(IRContext *context, Operand target){
     new->next = NULL;
     new->op = IR_RET;
     new->data.ret.return_value = target;
+    new->data.ret.type = type;
 
     return new;
 }
@@ -148,10 +198,11 @@ Operand newInt(int value){
     return op;
 }
 
-Operand newTmp(IRContext *context){
+Operand newTmp(CstTypes type, IRContext *context){
     Operand tmp;
     tmp.IR_type = IR_TMP;
     tmp.data.IR_tmp.id_tmp = context->current_tmp++;
+    tmp.data.IR_tmp.type = type;
 
     return tmp;
 }
@@ -168,6 +219,18 @@ IRoperation fromTokToIRtype(Tokentype type){
         case TOK_LESSEQ:        return IR_LESSEQ;
         case TOK_EQEQ:          return IR_EQEQ;
         case TOK_UNEQ:          return IR_UNEQ;
+
+        default:                return IR_ERROR;
+    }
+}
+
+CstTypes fromSemToIRTypes(SemanticType type){
+    switch (type){
+        case SEM_INT:           return IR_INT;
+        case SEM_CHAR:          return IR_CHAR;
+        case SEM_STRING:        return IR_STRING;
+        case SEM_VOID:          return IR_VOID;
+        case SEM_BOOL:          return IR_BOOL;
 
         default:                return IR_ERROR;
     }

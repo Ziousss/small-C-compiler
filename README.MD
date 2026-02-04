@@ -1,6 +1,6 @@
 # TELLA Compiler
 
-Welcome to **TELLA**, a basic **C compiler written in C**.
+Welcome to the **TELLA Compiler**, a basic **C compiler written in C**.
 
 This project is an educational compiler developed to improve my practical knowledge of the C language and to deepen my understanding of fundamental concepts such as **pointers**, **parsing**, and **semantic analysis**.
 
@@ -8,10 +8,9 @@ This project is an educational compiler developed to improve my practical knowle
 
 ## Overview
 
-- **Source language:** C  
-- **Implementation language:** C  
-- **Current stage:** Up to semantic analysis  
-- **Build system:** CMake  
+- **Source language:** C
+- **Implementation language:** C
+- **Build system:** CMake
 
 ---
 
@@ -25,24 +24,10 @@ This project is primarily focused on learning compiler design concepts rather th
 
 ## Current Progress
 
-The following compiler stages are implemented:
-
-- ✅ Lexer  
-- ✅ Parser  
-- ✅ Semantic Analyzer  
-
-These components are mostly functional but may still require fixes and improvements.
-
----
-
-## Next Steps
-
-The next major step is to implement the **code generation phase**.
-
-This will require additional research, particularly regarding:
-- Intermediate representation
-- Instruction selection
-- Code emission
+- Lexer  
+- Parser  
+- Semantic Analyzer  
+- IR (Ongoing)
 
 ---
 

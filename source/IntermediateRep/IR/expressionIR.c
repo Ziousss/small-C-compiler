@@ -37,6 +37,10 @@ Operand expressionIR(ASTnode *expression, IRContext *context){
             emit(binary, context);
             return tmp;
         }
+        case AST_FUNC_CALL: {
+            Operand func_ret = funcCallIR(expression, context);
+            return func_ret;
+        }
         default: {
             printf("The ast %s has not been cover by expressionIR yet.\n", astTypeToString(type));
             context->errors++;
